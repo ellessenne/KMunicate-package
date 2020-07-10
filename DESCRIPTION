@@ -24,18 +24,14 @@ Depends:
 Imports:
  ggfortify,
  ggplot2,
- knitr,
- rlang (>= 0.4.0),
- scales,
- stats
+ survival,
+ dplyr,
+ tidyr,
+ pammtools,
+ cowplot
 Suggests:
  covr,
  devtools,
- dplyr,
- eha,
  rmarkdown,
- rstpm2,
- survival,
  testthat,
- usethis,
- viridis
+ usethis
