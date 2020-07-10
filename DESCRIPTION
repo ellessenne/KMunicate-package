@@ -1,11 +1,41 @@
 Package: KMunicate
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
-Encoding: UTF-8
+Title: KMunicate-Style Kaplan–Meier Plots
+Version: 0.0.0.9000
+Authors@R: c(
+  person(given = "Alessandro", 
+         family = "Gasparini", 
+         role = c("aut", "cre"), 
+         email = "alessandro.gasparini@ki.se",
+         comment = c(ORCID = "0000-0002-8319-7624"))
+  )
+Description: Produce Kaplan–Meier plots in the style recommended following the KMunicate study <doi:10.1136/bmjopen-2019-030215>.
+URL: https://ellessenne.github.io/KMunicate-package/
+BugReports: https://github.com/ellessenne/KMunicate-package/issues
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
 LazyData: true
+ByteCompile: true
+Encoding: UTF-8
+Language: en-GB
+License: MIT + file LICENSE
+Depends:
+ R (>= 2.10)
+Imports:
+ ggfortify,
+ ggplot2,
+ knitr,
+ rlang (>= 0.4.0),
+ scales,
+ stats
+Suggests:
+ covr,
+ devtools,
+ dplyr,
+ eha,
+ rmarkdown,
+ rstpm2,
+ survival,
+ testthat,
+ usethis,
+ viridis
