@@ -4,3 +4,5 @@
 ^LICENSE\.md$
 ^testing\.R$
 ^README\.Rmd$
+^\.travis\.yml$
+^appveyor\.yml$

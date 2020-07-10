@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.com/ellessenne/KMunicate-package.svg?branch=master)](https://travis-ci.com/ellessenne/KMunicate-package)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/ellessenne/KMunicate-package?branch=master&svg=true)](https://ci.appveyor.com/project/ellessenne/KMunicate-package)
 <!-- badges: end -->
 
 The goal of {KMunicate} is to produce Kaplan–Meier plots in the style
