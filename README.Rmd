@@ -1,0 +1,55 @@
+---
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  dpi = 150
+)
+```
+
+# KMunicate
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of {KMunicate} is to produce Kaplan–Meier plots in the style recommended following the [KMunicate study](http://dx.doi.org/10.1136/bmjopen-2019-030215) (TP Morris *et al*. Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate. *BMJ Open*, 2019, 9:e030215). 
+
+## Installation
+
+You can install {KMunicate} from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ellessenne/KMunicate-package")
+```
+
+## Example
+
+```{r packages}
+library(survival)
+library(KMunicate)
+```
+
+The {KMunicate} package comes with a couple of bundled dataset, `cancer` and `brcancer`.
+The main function is named `KMunicate`:
+
+```{r brcancer, fig.height = 7, fig.width = 7 / sqrt(2)}
+KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
+time_scale <- seq(0, max(brcancer$rectime), by = 365)
+KMunicate(fit = KM, time_scale = time_scale)
+```
+
+```{r cancer, fig.height = 7, fig.width = 7 / sqrt(2)}
+KM <- survfit(Surv(studytime, died) ~ drug, data = cancer)
+time_scale <- seq(0, max(cancer$studytime), by = 7)
+KMunicate(fit = KM, time_scale = time_scale)
+```

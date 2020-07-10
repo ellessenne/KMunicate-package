@@ -3,3 +3,4 @@
 ^data-raw$
 ^LICENSE\.md$
 ^testing\.R$
+^README\.Rmd$
