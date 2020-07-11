@@ -1,6 +1,6 @@
 #' @keywords internal
 .extract_summary_data <- function(fit, time_scale) {
-  summ <- summary(fit, times = time_scale)
+  summ <- summary(fit, times = time_scale, extend = TRUE)
   d <- data.frame(
     time = summ$time,
     n.risk = summ$n.risk,
