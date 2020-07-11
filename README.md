@@ -44,7 +44,7 @@ time_scale <- seq(0, max(brcancer$rectime), by = 365)
 KMunicate(fit = KM, time_scale = time_scale)
 ```
 
-<img src="man/figures/README-brcancer-1.png" width="100%" />
+<img src="man/figures/README-brcancer-1.png" width="90%" />
 
 ``` r
 KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
@@ -52,7 +52,7 @@ time_scale <- seq(0, max(cancer2$studytime), by = 7)
 KMunicate(fit = KM, time_scale = time_scale)
 ```
 
-<img src="man/figures/README-cancer-1.png" width="100%" />
+<img src="man/figures/README-cancer-1.png" width="90%" />
 
 You also might wonder, does this work with a single arm? Yes, yes it
 does:
@@ -63,4 +63,4 @@ time_scale <- seq(0, max(cancer2$studytime), by = 7)
 KMunicate(fit = KM, time_scale = time_scale)
 ```
 
-<img src="man/figures/README-cancer-single-1.png" width="100%" />
+<img src="man/figures/README-cancer-single-1.png" width="90%" />
