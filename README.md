@@ -31,11 +31,6 @@ devtools::install_github("ellessenne/KMunicate-package")
 ``` r
 library(survival)
 library(KMunicate)
-#> 
-#> Attaching package: 'KMunicate'
-#> The following object is masked from 'package:survival':
-#> 
-#>     cancer
 ```
 
 The {KMunicate} package comes with a couple of bundled dataset, `cancer`
@@ -45,18 +40,14 @@ and `brcancer`. The main function is named `KMunicate`:
 KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
 time_scale <- seq(0, max(brcancer$rectime), by = 365)
 KMunicate(fit = KM, time_scale = time_scale)
-#> Warning: Removed 3 rows containing missing values (geom_text).
-
-#> Warning: Removed 3 rows containing missing values (geom_text).
 ```
 
 <img src="man/figures/README-brcancer-1.png" width="100%" />
 
 ``` r
-KM <- survfit(Surv(studytime, died) ~ drug, data = cancer)
-time_scale <- seq(0, max(cancer$studytime), by = 7)
+KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
+time_scale <- seq(0, max(cancer2$studytime), by = 7)
 KMunicate(fit = KM, time_scale = time_scale)
-#> Warning: Removed 3 rows containing missing values (geom_text).
 ```
 
 <img src="man/figures/README-cancer-1.png" width="100%" />

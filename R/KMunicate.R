@@ -18,11 +18,8 @@
 #' time_scale <- seq(0, max(cancer$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
 KMunicate <- function(fit, time_scale, .theme = ggplot2::theme_minimal(), .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .alpha = 0.25, .rel_heights = NULL) {
-
   ### Fortify data
-  data <- ggplot2::fortify(fit)
-  data_zero <- data.frame(time = 0, n.risk = fit$n, n.event = 0, n.censor = 0, surv = 1, std.err = 0, upper = 1, lower = 1, strata = unique(data$strata))
-  data <- rbind.data.frame(data, data_zero)
+  data <- ggplot2::fortify(fit, surv.connect = TRUE)
 
   ### Create plot
   plot <- ggplot2::ggplot(data, ggplot2::aes(x = time, y = surv)) +
@@ -41,23 +38,13 @@ KMunicate <- function(fit, time_scale, .theme = ggplot2::theme_minimal(), .color
   }
 
   ### Create tables
-  data$table_group <- findInterval(x = data$time, vec = time_scale, left.open = TRUE)
-  table_data <- dplyr::group_by(data, strata, table_group)
-  table_data <- dplyr::summarise(table_data,
-    events = sum(n.event),
-    censor = sum(n.censor),
-    at_risk = max(n.risk)
-  )
-  table_data <- dplyr::ungroup(table_data)
-  table_data <- dplyr::left_join(table_data, data.frame(time_scale, table_group = seq_along(time_scale) - 1), by = "table_group")
-  table_data$table_group <- NULL
-  table_data <- tidyr::pivot_longer(data = table_data, cols = c("events", "censor", "at_risk"))
-  table_data$name <- factor(table_data$name, levels = c("events", "censor", "at_risk"), labels = c("Events", "Censored", "At risk"))
-
+  table_data <- .extract_summary_data(fit = fit, time_scale = time_scale)
+  table_data <- tidyr::pivot_longer(data = table_data, cols = c("n.risk", "n.event", "n.censor"))
+  table_data$name <- factor(table_data$name, levels = c("n.event", "n.censor", "n.risk"), labels = c("Events", "Censored", "At risk"))
   ### Create table 'plots'
   tds <- split(table_data, f = table_data$strata)
   tds <- lapply(seq_along(tds), function(i) {
-    ggplot2::ggplot(tds[[i]], ggplot2::aes(x = time_scale, y = name, label = value)) +
+    ggplot2::ggplot(tds[[i]], ggplot2::aes(x = time, y = name, label = value)) +
       ggplot2::geom_text() +
       ggplot2::scale_x_continuous(breaks = time_scale) +
       ggplot2::coord_cartesian(xlim = range(time_scale)) +

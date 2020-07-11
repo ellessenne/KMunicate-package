@@ -6,9 +6,10 @@
 #' * `drug` Drug type, with `drug = 1` being placebo;
 #' * `age` Age of a patient at baseline.
 #' @references http://www.stata-press.com/data/r16/cancer.dta
+#' @note The dataset is named `cancer2` to avoid name collision with the `cancer` dataset from the survival package.
 #' @examples
-#' data("cancer", package = "KMunicate")
-"cancer"
+#' data("cancer2", package = "KMunicate")
+"cancer2"
 
 #' @title German Breast Cancer Study Data
 #' @description German breast cancer study data, imported from Stata 16.
