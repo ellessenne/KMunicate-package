@@ -8,7 +8,7 @@
 KMunicate(
   fit,
   time_scale,
-  .theme = ggplot2::theme_minimal(),
+  .theme = NULL,
   .color_scale = NULL,
   .fill_scale = NULL,
   .xlab = "Time",
@@ -21,7 +21,7 @@ KMunicate(
 
 \item{time_scale}{The time scale that will be used for the x-axis and for the summary tables.}
 
-\item{.theme}{\code{ggplot} theme used by the plot. Defaults to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}.}
+\item{.theme}{\code{ggplot} theme used by the plot. Defaults to \code{NULL}, where the default \code{ggplot} theme will be used.}
 
 \item{.color_scale}{Colour scale used for the plot. Has to be a \verb{scale_colour_*} component, and defaults to \code{NULL} where the default colour scales will be used.}
 
@@ -31,7 +31,7 @@ KMunicate(
 
 \item{.alpha}{Transparency of the point-wise confidence intervals}
 
-\item{.rel_heights}{Override default relative heights of plots and tables. See \code{\link[cowplot:plot_grid]{cowplot::plot_grid()}} for more details on how to use this argument.}
+\item{.rel_heights}{Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See \code{\link[cowplot:plot_grid]{cowplot::plot_grid()}} for more details on how to use this argument.}
 }
 \value{
 A KMunicate-style \code{ggplot} object.

@@ -23,6 +23,7 @@ Depends:
  R (>= 2.10),
  survival
 Imports:
+ checkmate,
  cowplot,
  ggfortify,
  ggplot2,

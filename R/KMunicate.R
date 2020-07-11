@@ -2,12 +2,12 @@
 #' @description Produce Kaplan–Meier plots in the style recommended following the KMunicate study <doi:10.1136/bmjopen-2019-030215>.
 #' @param fit A `survfit` object.
 #' @param time_scale The time scale that will be used for the x-axis and for the summary tables.
-#' @param .theme `ggplot` theme used by the plot. Defaults to [ggplot2::theme_minimal()].
+#' @param .theme `ggplot` theme used by the plot. Defaults to `NULL`, where the default `ggplot` theme will be used.
 #' @param .color_scale Colour scale used for the plot. Has to be a `scale_colour_*` component, and defaults to `NULL` where the default colour scales will be used.
 #' @param .fill_scale Fill scale used for the plot. Has to be a `scale_fill_*` component, and defaults to `NULL` where the default fill scales will be used.
 #' @param .xlab Label for the horizontal axis, defaults to _Time_.
 #' @param .alpha Transparency of the point-wise confidence intervals
-#' @param .rel_heights Override default relative heights of plots and tables. See [cowplot::plot_grid()] for more details on how to use this argument.
+#' @param .rel_heights Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See [cowplot::plot_grid()] for more details on how to use this argument.
 #' @return A KMunicate-style `ggplot` object.
 #' @export
 #'
@@ -17,7 +17,25 @@
 #' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
 #' time_scale <- seq(0, max(cancer2$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
-KMunicate <- function(fit, time_scale, .theme = ggplot2::theme_minimal(), .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .alpha = 0.25, .rel_heights = NULL) {
+KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .alpha = 0.25, .rel_heights = NULL) {
+
+  ### Check arguments
+  arg_checks <- checkmate::makeAssertCollection()
+  # 'fit' must be of class 'survfit'
+  checkmate::assert_class(x = fit, classes = "survfit", add = arg_checks)
+  # 'time_scale' must be a numeric vector
+  checkmate::assert_numeric(x = time_scale, add = arg_checks)
+  # '.theme' must be of class 'theme', 'gg'
+  checkmate::assert_class(x = .theme, classes = c("theme", "gg"), null.ok = TRUE, add = arg_checks)
+  # '.xlab' must be a string
+  checkmate::assert_string(x = .xlab, add = arg_checks)
+  # '.alpha' must be a number
+  checkmate::assert_number(x = .alpha, add = arg_checks)
+  # '.rel_heights' must be a numeric vector or NULL
+  checkmate::assert_numeric(x = .rel_heights, null.ok = TRUE, add = arg_checks)
+  # Report
+  if (!arg_checks$isEmpty()) checkmate::reportAssertions(arg_checks)
+
   ### Fortify data
   data <- ggplot2::fortify(fit, surv.connect = TRUE)
 
@@ -27,8 +45,11 @@ KMunicate <- function(fit, time_scale, .theme = ggplot2::theme_minimal(), .color
     ggplot2::geom_step(ggplot2::aes(color = strata, linetype = strata)) +
     ggplot2::scale_x_continuous(breaks = time_scale) +
     ggplot2::coord_cartesian(ylim = c(0, 1), xlim = range(time_scale)) +
-    ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = "Estimated survival") +
-    .theme +
+    ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = "Estimated survival")
+  if (!is.null(.theme)) {
+    plot <- plot + .theme
+  }
+  plot <- plot +
     ggplot2::theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank())
   if (!is.null(.color_scale)) {
     plot <- plot + .color_scale
