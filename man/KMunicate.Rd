@@ -43,9 +43,9 @@ Produce Kaplan–Meier plots in the style recommended following the KMunicate st
 }
 \examples{
 library(survival)
-data("cancer", package = "KMunicate")
-KM <- survfit(Surv(studytime, died) ~ drug, data = cancer)
-time_scale <- seq(0, max(cancer$studytime), by = 7)
+data("cancer2", package = "KMunicate")
+KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
+time_scale <- seq(0, max(cancer2$studytime), by = 7)
 KMunicate(fit = KM, time_scale = time_scale)
 }
 \author{

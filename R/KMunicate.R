@@ -13,9 +13,9 @@
 #'
 #' @examples
 #' library(survival)
-#' data("cancer", package = "KMunicate")
-#' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer)
-#' time_scale <- seq(0, max(cancer$studytime), by = 7)
+#' data("cancer2", package = "KMunicate")
+#' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
+#' time_scale <- seq(0, max(cancer2$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
 KMunicate <- function(fit, time_scale, .theme = ggplot2::theme_minimal(), .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .alpha = 0.25, .rel_heights = NULL) {
   ### Fortify data
