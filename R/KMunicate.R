@@ -56,7 +56,7 @@ KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill
     plot <- plot + .theme
   }
   plot <- plot +
-    ggplot2::theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = ggplot2::element_blank(), panel.grid.minor = ggplot2::element_blank())
+    ggplot2::theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank())
   if (!is.null(.color_scale)) {
     plot <- plot + .color_scale
   }
