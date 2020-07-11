@@ -9,6 +9,8 @@
 status](https://travis-ci.com/ellessenne/KMunicate-package.svg?branch=master)](https://travis-ci.com/ellessenne/KMunicate-package)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/ellessenne/KMunicate-package?branch=master&svg=true)](https://ci.appveyor.com/project/ellessenne/KMunicate-package)
+[![Codecov test
+coverage](https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg)](https://codecov.io/gh/ellessenne/KMunicate-package?branch=master)
 <!-- badges: end -->
 
 The goal of {KMunicate} is to produce Kaplan–Meier plots in the style
