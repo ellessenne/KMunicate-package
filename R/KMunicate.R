@@ -40,9 +40,15 @@ KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill
   data <- ggplot2::fortify(fit, surv.connect = TRUE)
 
   ### Create plot
-  plot <- ggplot2::ggplot(data, ggplot2::aes(x = time, y = surv)) +
-    pammtools::geom_stepribbon(ggplot2::aes(ymin = lower, ymax = upper, fill = strata), alpha = .alpha) +
-    ggplot2::geom_step(ggplot2::aes(color = strata, linetype = strata)) +
+  plot <- ggplot2::ggplot(data, ggplot2::aes(x = time, y = surv, ymin = lower, ymax = upper))
+  if ("strata" %in% names(fit)) {
+    plot <- plot + pammtools::geom_stepribbon(ggplot2::aes(fill = strata), alpha = .alpha) +
+      ggplot2::geom_step(ggplot2::aes(color = strata, linetype = strata))
+  } else {
+    plot <- plot + pammtools::geom_stepribbon(alpha = .alpha) +
+      ggplot2::geom_step()
+  }
+  plot <- plot +
     ggplot2::scale_x_continuous(breaks = time_scale) +
     ggplot2::coord_cartesian(ylim = c(0, 1), xlim = range(time_scale)) +
     ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = "Estimated survival")
@@ -63,6 +69,9 @@ KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill
   table_data <- tidyr::pivot_longer(data = table_data, cols = c("n.risk", "n.event", "n.censor"))
   table_data$name <- factor(table_data$name, levels = c("n.event", "n.censor", "n.risk"), labels = c("Events", "Censored", "At risk"))
   ### Create table 'plots'
+  if (!("strata" %in% names(fit))) {
+    table_data$strata <- "Overall"
+  }
   tds <- split(table_data, f = table_data$strata)
   tds <- lapply(seq_along(tds), function(i) {
     ggplot2::ggplot(tds[[i]], ggplot2::aes(x = time, y = name, label = value)) +

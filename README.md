@@ -53,3 +53,14 @@ KMunicate(fit = KM, time_scale = time_scale)
 ```
 
 <img src="man/figures/README-cancer-1.png" width="100%" />
+
+You also might wonder, does this work with a single arm? Yes, yes it
+does:
+
+``` r
+KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
+time_scale <- seq(0, max(cancer2$studytime), by = 7)
+KMunicate(fit = KM, time_scale = time_scale)
+```
+
+<img src="man/figures/README-cancer-single-1.png" width="100%" />
