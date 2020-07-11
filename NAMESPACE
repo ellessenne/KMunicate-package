@@ -2,7 +2,6 @@
 
 export(KMunicate)
 import(cowplot)
-import(dplyr)
 import(ggfortify)
 import(ggplot2)
 import(pammtools)
