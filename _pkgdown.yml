@@ -1,0 +1,6 @@
+url: https://ellessenne.github.io/KMunicate-package
+template:
+  params:
+    bootswatch: flatly
+home:
+  title: KMunicate-Style Kaplan–Meier Plots
