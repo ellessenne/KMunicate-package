@@ -8,6 +8,7 @@
 #' @param .xlab Label for the horizontal axis, defaults to _Time_.
 #' @param .alpha Transparency of the point-wise confidence intervals
 #' @param .rel_heights Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See [cowplot::plot_grid()] for more details on how to use this argument.
+#' @param .ff A string used to define a base font for the plot.
 #' @return A KMunicate-style `ggplot` object.
 #' @export
 #'
@@ -17,7 +18,7 @@
 #' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
 #' time_scale <- seq(0, max(cancer2$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
-KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .alpha = 0.25, .rel_heights = NULL) {
+KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .alpha = 0.25, .rel_heights = NULL, .ff = NULL) {
 
   ### Check arguments
   arg_checks <- checkmate::makeAssertCollection()
@@ -37,6 +38,8 @@ KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill
   checkmate::assert_number(x = .alpha, add = arg_checks)
   # '.rel_heights' must be a numeric vector or NULL
   checkmate::assert_numeric(x = .rel_heights, null.ok = TRUE, add = arg_checks)
+  # '.ff' must be a string or NULL
+  checkmate::assert_string(x = .ff, null.ok = TRUE, add = arg_checks)
   # Report
   if (!arg_checks$isEmpty()) checkmate::reportAssertions(arg_checks)
 
@@ -58,6 +61,8 @@ KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill
     ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = "Estimated survival")
   if (!is.null(.theme)) {
     plot <- plot + .theme
+  } else if (!is.null(.ff)) {
+    plot <- plot + ggplot2::theme_gray(base_family = .ff)
   }
   plot <- plot +
     ggplot2::theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank())
@@ -78,12 +83,22 @@ KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill
   }
   tds <- split(table_data, f = table_data$strata)
   tds <- lapply(seq_along(tds), function(i) {
-    ggplot2::ggplot(tds[[i]], ggplot2::aes(x = time, y = name, label = value)) +
-      ggplot2::geom_text() +
+    p <- ggplot2::ggplot(tds[[i]], ggplot2::aes(x = time, y = name, label = value))
+    if (is.null(.ff)) {
+      p <- p + ggplot2::geom_text()
+    } else {
+      p <- p + ggplot2::geom_text(mapping = ggplot2::aes(family = .ff))
+    }
+    p <- p +
       ggplot2::scale_x_continuous(breaks = time_scale) +
       ggplot2::coord_cartesian(xlim = range(time_scale)) +
-      ggplot2::theme_void() +
-      ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic")) +
+      ggplot2::theme_void()
+    if (is.null(.ff)) {
+      p <- p + ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic"))
+    } else {
+      p <- p + ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic", family = .ff), plot.title = ggplot2::element_text(family = .ff))
+    }
+    p <- p +
       ggplot2::labs(title = names(tds)[i])
   })
 

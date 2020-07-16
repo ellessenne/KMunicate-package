@@ -64,3 +64,142 @@ KMunicate(fit = KM, time_scale = time_scale)
 ```
 
 <img src="man/figures/README-cancer-single-1.png" width="90%" />
+
+## Custom Fonts
+
+Assuming you have set up your computer to use custom fonts with
+`ggplot2`, customising your KMunicate-style plot is trivial. All you
+have to do is pass the font name as the `.ff` argument:
+
+``` r
+KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
+time_scale <- seq(0, max(cancer2$studytime), by = 7)
+KMunicate(fit = KM, time_scale = time_scale, .ff = "Victor Mono")
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+
+#> Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family
+#> 'Victor Mono' not found in PostScript font database
+```
+
+<img src="man/figures/README-cancer-single-ff-1.png" width="90%" />
