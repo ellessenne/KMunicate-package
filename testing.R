@@ -18,3 +18,9 @@ KMunicate(fit = KM, time_scale = time_scale)
 KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
 time_scale <- seq(0, max(cancer2$studytime), by = 7)
 KMunicate(fit = KM, time_scale = time_scale, .ff = "Victor Mono")
+
+###
+devtools::check_win_devel(quiet = TRUE)
+devtools::check_win_oldrelease(quiet = TRUE)
+devtools::check_win_release(quiet = TRUE)
+rhub::check_for_cran()
