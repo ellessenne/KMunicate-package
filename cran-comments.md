@@ -10,3 +10,9 @@
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
+
+* Possibly mis-spelled words in DESCRIPTION:
+    KMunicate (2:8, 11:80)
+    Kaplan (2:24, 11:22)
+    
+These words are spelled correctly: they are the name of a study and a surname, respectively.
