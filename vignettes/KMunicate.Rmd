@@ -53,6 +53,7 @@ For instance, we can define 5 equally-spaced breaks between time zero and the la
 
 ```{r time_scale}
 ts <- seq(0, max(brcancer$rectime), length.out = 5)
+ts
 ```
 
 Finally, we can pass `fit` and `ts` to the `KMunicate()` function to simply obtain a plot:
@@ -135,7 +136,7 @@ We can combine all the above to obtain an (arguably) much better plot:
 KMunicate(
   fit = fit2,
   time_scale = ts,
-  .theme = ggplot2::theme_minimal(),
+  .theme = ggplot2::theme_minimal(base_family = "Roboto Condensed"),
   .xlab = "Time (in days)",
   .color_scale = ggplot2::scale_color_brewer(type = "qual", palette = "Set2"),
   .fill_scale = ggplot2::scale_fill_brewer(type = "qual", palette = "Set2"),
