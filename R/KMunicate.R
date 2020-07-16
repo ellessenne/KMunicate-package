@@ -25,8 +25,12 @@ KMunicate <- function(fit, time_scale, .theme = NULL, .color_scale = NULL, .fill
   checkmate::assert_class(x = fit, classes = "survfit", add = arg_checks)
   # 'time_scale' must be a numeric vector
   checkmate::assert_numeric(x = time_scale, add = arg_checks)
-  # '.theme' must be of class 'theme', 'gg'
+  # '.theme' must be of class 'theme', 'gg' and must pass ggplot2::is.ggtheme()
   checkmate::assert_class(x = .theme, classes = c("theme", "gg"), null.ok = TRUE, add = arg_checks)
+  if (!is.null(.theme)) checkmate::assert_true(x = ggplot2::is.theme(.theme), add = arg_checks)
+  # '.color_scale' and '.fill_scale' must pass ggplot2::is.ggproto()
+  if (!is.null(.color_scale)) checkmate::assert_true(x = ggplot2::is.ggproto(.color_scale), add = arg_checks)
+  if (!is.null(.fill_scale)) checkmate::assert_true(x = ggplot2::is.ggproto(.fill_scale), add = arg_checks)
   # '.xlab' must be a string
   checkmate::assert_string(x = .xlab, add = arg_checks)
   # '.alpha' must be a number
