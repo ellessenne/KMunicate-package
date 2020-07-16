@@ -1,5 +1,5 @@
-#' @title KMunicate-Style Kaplan–Meier Plots
-#' @description Produce Kaplan–Meier plots in the style recommended following the KMunicate study <doi:10.1136/bmjopen-2019-030215>.
+#' @title Create KMunicate-Style Kaplan–Meier Plots
+#' @description Produce Kaplan–Meier plots in the style recommended following the KMunicate study by TP Morris _et al_. (\doi{10.1136/bmjopen-2019-030215}).
 #' @param fit A `survfit` object.
 #' @param time_scale The time scale that will be used for the x-axis and for the summary tables.
 #' @param .theme `ggplot` theme used by the plot. Defaults to `NULL`, where the default `ggplot` theme will be used.

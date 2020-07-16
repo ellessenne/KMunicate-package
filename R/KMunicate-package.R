@@ -1,8 +1,6 @@
 #' @title KMunicate-Style Kaplan–Meier Plots
 #'
-#' @description Produce Kaplan–Meier plots in the style recommended following the KMunicate study <doi:10.1136/bmjopen-2019-030215>.
-#'
-#' @name KMunicate
+#' @name KMunicate_package
 #' @docType package
 #' @author Alessandro Gasparini (alessandro.gasparini@@ki.se)
 #' @import cowplot ggfortify ggplot2 pammtools survival tidyr

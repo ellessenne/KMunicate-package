@@ -1,6 +1,6 @@
 Package: KMunicate
 Title: KMunicate-Style Kaplan–Meier Plots
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
   person(given = "Alessandro", 
          family = "Gasparini", 
@@ -9,7 +9,7 @@ Authors@R: c(
          comment = c(ORCID = "0000-0002-8319-7624"))
   )
 Description: Produce Kaplan–Meier plots in the style recommended following the KMunicate study <doi:10.1136/bmjopen-2019-030215>.
-URL: https://ellessenne.github.io/KMunicate-package/
+URL: https://ellessenne.github.io/KMunicate-package
 BugReports: https://github.com/ellessenne/KMunicate-package/issues
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

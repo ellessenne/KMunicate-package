@@ -14,6 +14,12 @@ testthat::test_that("Output is a ggplot — multiple arms", {
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .theme = ggplot2::theme_bw()), class = c("gg", "ggplot"))
 
+  suppressMessages({
+    library(extrafont)
+    extrafont::loadfonts()
+  })
+  testthat::expect_s3_class(object = suppressWarnings(KMunicate(fit = KM, time_scale = time_scale, .ff = "Times New Roman")), class = c("gg", "ggplot"))
+
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .color_scale = ggplot2::scale_color_discrete()), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = ggplot2::scale_fill_discrete()), class = c("gg", "ggplot"))
 })
@@ -33,6 +39,12 @@ testthat::test_that("Output is a ggplot — single arms", {
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .rel_heights = c(1, 1, 1)), class = c("gg", "ggplot"))
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .theme = ggplot2::theme_bw()), class = c("gg", "ggplot"))
+
+  suppressMessages({
+    library(extrafont)
+    extrafont::loadfonts()
+  })
+  testthat::expect_s3_class(object = suppressWarnings(KMunicate(fit = KM, time_scale = time_scale, .ff = "Times New Roman")), class = c("gg", "ggplot"))
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .color_scale = ggplot2::scale_color_discrete()), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = ggplot2::scale_fill_discrete()), class = c("gg", "ggplot"))
