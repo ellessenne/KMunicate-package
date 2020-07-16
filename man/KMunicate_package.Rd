@@ -4,6 +4,9 @@
 \name{KMunicate_package}
 \alias{KMunicate_package}
 \title{KMunicate-Style Kaplan–Meier Plots}
+\description{
+Produce Kaplan–Meier plots in the style recommended following the KMunicate study (\doi{10.1136/bmjopen-2019-030215}).
+}
 \author{
 Alessandro Gasparini (alessandro.gasparini@ki.se)
 }
