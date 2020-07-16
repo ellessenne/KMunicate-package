@@ -32,6 +32,7 @@ Imports:
 Suggests:
  covr,
  devtools,
+ extrafont,
  knitr,
  rmarkdown,
  testthat,

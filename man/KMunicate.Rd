@@ -13,7 +13,8 @@ KMunicate(
   .fill_scale = NULL,
   .xlab = "Time",
   .alpha = 0.25,
-  .rel_heights = NULL
+  .rel_heights = NULL,
+  .ff = NULL
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ KMunicate(
 \item{.alpha}{Transparency of the point-wise confidence intervals}
 
 \item{.rel_heights}{Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See \code{\link[cowplot:plot_grid]{cowplot::plot_grid()}} for more details on how to use this argument.}
+
+\item{.ff}{A string used to define a base font for the plot.}
 }
 \value{
 A KMunicate-style \code{ggplot} object.

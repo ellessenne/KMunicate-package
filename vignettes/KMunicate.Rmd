@@ -1,0 +1,144 @@
+---
+title: "Create KMunicate-Style Plots"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create KMunicate-Style Plots}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "75%",
+  fig.align = "center",
+  dpi = 200
+)
+```
+
+The {KMunicate} package can be used to produce Kaplan-Meier plots in the style recommended following the [KMunicate study](https://doi.org/10.1136/bmjopen-2019-030215) by TP Morris _et al_. (2019).
+
+In this vignette, we'll see learn how to produce such a plot using the {KMunicate} package.
+
+## Data
+
+We will be using the `brcancer` dataset, which comes bundled with {KMunicate}:
+
+```{r}
+data("brcancer", package = "KMunicate")
+str(brcancer)
+```
+
+## Single-Arm Plot
+
+We start by creating a KMunicate-style plot for all study subjects.
+First, we load the package:
+
+```{r setup}
+library(KMunicate)
+```
+
+Then, we fit a Kaplan-Meier curve using the `survfit` function from the {survival} package:
+
+```{r fit}
+fit <- survfit(Surv(rectime, censrec) ~ 1, data = brcancer)
+fit
+```
+
+Then, we need to define the horizontal axis of the plot.
+For instance, we can define 5 equally-spaced breaks between time zero and the largest observed time:
+
+```{r time_scale}
+ts <- seq(0, max(brcancer$rectime), length.out = 5)
+```
+
+Finally, we can pass `fit` and `ts` to the `KMunicate()` function to simply obtain a plot:
+
+```{r p1, fig.height = 6, fig.width = 6}
+KMunicate(fit = fit, time_scale = ts)
+```
+
+## Multiple-Arms Plot
+
+A multiple-arms plot will be automatically produced if the `survfit` object has covariates in it.
+For instance, if we fit the Kaplan-Meier estimator by treatment arm:
+
+```{r fit2}
+fit2 <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
+fit2
+```
+
+We will be using the same time scale as before (`ts`), and the call to `KMunicate()` is analogous:
+
+```{r p2, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(fit = fit2, time_scale = ts)
+```
+
+## Customisation
+
+The `KMunicate()` function contains a few options to customise the produced plot.
+First, we can pass a `ggplot2` theme to the `.theme` argument:
+
+```{r p3, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(fit = fit2, time_scale = ts, .theme = ggplot2::theme_minimal())
+```
+
+We can also pass custom colour (and fill) scales:
+
+```{r p4, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(
+  fit = fit2,
+  time_scale = ts,
+  .color_scale = ggplot2::scale_color_brewer(type = "qual", palette = "Set2"),
+  .fill_scale = ggplot2::scale_fill_brewer(type = "qual", palette = "Set2")
+)
+```
+
+We can customise the transparency of the point-wise confidence intervals via the `.alpha` argument:
+
+```{r p5, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(fit = fit2, time_scale = ts, .alpha = 0.1)
+```
+
+We can customise the label of the horizontal axis:
+
+```{r p6, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(fit = fit2, time_scale = ts, .xlab = "New Label (Time in Days, Actually)")
+```
+
+We can customise the relative size of risk tables and plots, although the default _should_ generally work fine for most scenarios:
+
+```{r p7, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(fit = fit2, time_scale = ts, .rel_heights = c(1, 1, 1))
+```
+
+Finally, assuming you have set up your computer and R session to support custom fonts, you can produce plots with custom fonts:
+
+```{r fonts, warning = FALSE, message = FALSE}
+library(extrafont)
+# extrafont::font_import()
+extrafont::loadfonts()
+```
+
+```{r p8, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(fit = fit2, time_scale = ts, .ff = "Times New Roman")
+```
+
+# A _Better_ Plot
+
+We can combine all the above to obtain an (arguably) much better plot:
+
+```{r better-plot, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(
+  fit = fit2,
+  time_scale = ts,
+  .theme = ggplot2::theme_minimal(),
+  .xlab = "Time (in days)",
+  .color_scale = ggplot2::scale_color_brewer(type = "qual", palette = "Set2"),
+  .fill_scale = ggplot2::scale_fill_brewer(type = "qual", palette = "Set2"),
+  .ff = "Roboto Condensed"
+)
+```
