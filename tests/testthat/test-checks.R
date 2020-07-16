@@ -65,3 +65,18 @@ testthat::test_that("Arg: .alpha", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .alpha = KM))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .alpha = time_scale))
 })
+
+testthat::test_that("Arg: .rel_heights", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .rel_heights = "1"))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .rel_heights = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .rel_heights = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .rel_heights = KM))
+})
+
+testthat::test_that("Arg: .ff", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = 1))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = time_scale))
+})
