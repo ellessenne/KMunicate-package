@@ -2,6 +2,7 @@
 
 * local R installation, R 4.0.2, macOS Catalina 10.15.5
 * ubuntu (on travis-ci, devel, release, oldrelease)
+* windows (via win-builder, devel, release, oldrelease)
 * windows (via appveyor)
 * rhub (with rhub::check_for_cran())
 
