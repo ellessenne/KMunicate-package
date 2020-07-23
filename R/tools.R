@@ -1,5 +1,5 @@
 #' @keywords internal
-.extract_summary_data <- function(fit, time_scale, risk_table) {
+.fortify_summary <- function(fit, time_scale, risk_table) {
   summ <- summary(fit, times = time_scale, extend = TRUE)
   d <- data.frame(
     time = summ$time,
@@ -26,4 +26,9 @@
     d <- do.call(rbind, dsplit)
   }
   return(d)
+}
+
+#' @keywords internal
+.fortify <- function() {
+
 }

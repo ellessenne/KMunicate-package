@@ -87,7 +87,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .theme = NULL,
   # Create tables if requested
   if (!is.null(.risk_table)) {
     ### Create tables
-    table_data <- .extract_summary_data(fit = fit, time_scale = time_scale, risk_table = .risk_table)
+    table_data <- .fortify_summary(fit = fit, time_scale = time_scale, risk_table = .risk_table)
     table_data <- tidyr::pivot_longer(data = table_data, cols = c("n.risk", "n.event", "n.censor"))
     table_data$name <- factor(table_data$name, levels = c("n.event", "n.censor", "n.risk"), labels = c("Events", "Censored", "At risk"))
     ### Create table 'plots'
