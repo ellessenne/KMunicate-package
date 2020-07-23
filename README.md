@@ -67,6 +67,43 @@ KMunicate(fit = KM, time_scale = time_scale)
 
 <img src="man/figures/README-cancer-single-1.png" width="90%" style="display: block; margin: auto;" />
 
+## Customise Risk Table
+
+By default, `KMunicate()` will build a risk table conform to the
+KMunicate style, e.g., with cumulative number of events and censored
+(the column-wise sum is equal to the total number of individuals at risk
+per arm):
+
+``` r
+KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
+time_scale <- seq(0, max(brcancer$rectime), by = 365)
+KMunicate(fit = KM, time_scale = time_scale)
+```
+
+<img src="man/figures/README-brcancer-KMunicate-1.png" width="90%" style="display: block; margin: auto;" />
+
+Alternatively, it is possible to customise the risk table via the
+`.risk_table` argument. For instance, if one wants to have interval-wise
+number of events and censored, just pass the `survfit` value to the
+`.risk_table` argument:
+
+``` r
+KMunicate(fit = KM, time_scale = time_scale, .risk_table = "survfit")
+```
+
+<img src="man/figures/README-brcancer-survfit-1.png" width="90%" style="display: block; margin: auto;" />
+
+This is the default output of the `summary.survfit()` function.
+
+Finally, it is also possible to fully omit the risk table by setting
+`.risk_table = NULL`:
+
+``` r
+KMunicate(fit = KM, time_scale = time_scale, .risk_table = NULL)
+```
+
+<img src="man/figures/README-brcancer-NULL-1.png" width="90%" style="display: block; margin: auto;" />
+
 ## Custom Fonts
 
 Assuming you have set up your computer to use custom fonts with

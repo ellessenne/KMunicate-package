@@ -7,6 +7,7 @@
 KMunicate(
   fit,
   time_scale,
+  .risk_table = "KMunicate",
   .theme = NULL,
   .color_scale = NULL,
   .fill_scale = NULL,
@@ -20,6 +21,11 @@ KMunicate(
 \item{fit}{A \code{survfit} object.}
 
 \item{time_scale}{The time scale that will be used for the x-axis and for the summary tables.}
+
+\item{.risk_table}{This arguments define the type of risk table that is produced.
+Defaults to \code{KMunicate}, where the cumulative number of events and censored are calculated.
+Another possibility is \code{survfit}, which will use the default numbers returned by \code{summary.survfit} (e.g. number of events and censored per interval).
+\code{.risk_table} can also be \code{NULL}, in which case the risk table will be omitted from the plot.}
 
 \item{.theme}{\code{ggplot} theme used by the plot. Defaults to \code{NULL}, where the default \code{ggplot} theme will be used.}
 

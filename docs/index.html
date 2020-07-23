@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">KMunicate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1-9000</span>
       </span>
     </div>
 
@@ -105,11 +105,27 @@
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">KM</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">time_scale</span>)</pre></div>
 <p><img src="reference/figures/README-cancer-single-1.png" width="90%" style="display: block; margin: auto;"></p>
 </div>
+<div id="customise-risk-table" class="section level2">
+<h2 class="hasAnchor">
+<a href="#customise-risk-table" class="anchor"></a>Customise Risk Table</h2>
+<p>By default, <code><a href="reference/KMunicate.html">KMunicate()</a></code> will build a risk table conform to the KMunicate style, e.g., with cumulative number of events and censored (the column-wise sum is equal to the total number of individuals at risk per arm):</p>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="no">KM</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span>(<span class="no">rectime</span>, <span class="no">censrec</span>) ~ <span class="no">hormon</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">brcancer</span>)
+<span class="no">time_scale</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">brcancer</span>$<span class="no">rectime</span>), <span class="kw">by</span> <span class="kw">=</span> <span class="fl">365</span>)
+<span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">KM</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">time_scale</span>)</pre></div>
+<p><img src="reference/figures/README-brcancer-KMunicate-1.png" width="90%" style="display: block; margin: auto;"></p>
+<p>Alternatively, it is possible to customise the risk table via the <code>.risk_table</code> argument. For instance, if one wants to have interval-wise number of events and censored, just pass the <code>survfit</code> value to the <code>.risk_table</code> argument:</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">KM</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">time_scale</span>, <span class="kw">.risk_table</span> <span class="kw">=</span> <span class="st">"survfit"</span>)</pre></div>
+<p><img src="reference/figures/README-brcancer-survfit-1.png" width="90%" style="display: block; margin: auto;"></p>
+<p>This is the default output of the <code><a href="https://rdrr.io/pkg/survival/man/summary.survfit.html">summary.survfit()</a></code> function.</p>
+<p>Finally, it is also possible to fully omit the risk table by setting <code>.risk_table = NULL</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">KM</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">time_scale</span>, <span class="kw">.risk_table</span> <span class="kw">=</span> <span class="kw">NULL</span>)</pre></div>
+<p><img src="reference/figures/README-brcancer-NULL-1.png" width="90%" style="display: block; margin: auto;"></p>
+</div>
 <div id="custom-fonts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#custom-fonts" class="anchor"></a>Custom Fonts</h2>
 <p>Assuming you have set up your computer to use custom fonts with <code>ggplot2</code>, customising your KMunicate-style plot is trivial. All you have to do is pass the font name as the <code>.ff</code> argument:</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">KM</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span>(<span class="no">studytime</span>, <span class="no">died</span>) ~ <span class="fl">1</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">cancer2</span>)
+<div class="sourceCode" id="cb9"><pre class="r"><span class="no">KM</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span>(<span class="no">studytime</span>, <span class="no">died</span>) ~ <span class="fl">1</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">cancer2</span>)
 <span class="no">time_scale</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">cancer2</span>$<span class="no">studytime</span>), <span class="kw">by</span> <span class="kw">=</span> <span class="fl">7</span>)
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">KM</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">time_scale</span>, <span class="kw">.ff</span> <span class="kw">=</span> <span class="st">"Victor Mono"</span>)</pre></div>
 <p><img src="reference/figures/README-cancer-single-ff-1.png" width="90%" style="display: block; margin: auto;"></p>

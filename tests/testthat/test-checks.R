@@ -18,6 +18,14 @@ testthat::test_that("Arg: time_scale", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = brcancer))
 })
 
+testthat::test_that("Arg: .risk_table", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = 1))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = time_scale))
+})
+
 testthat::test_that("Arg: .theme", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .theme = 1))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .theme = "1"))
