@@ -1,7 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# KMunicate
+KMunicate
+=========
 
 <!-- badges: start -->
 
@@ -21,72 +22,55 @@ study](http://dx.doi.org/10.1136/bmjopen-2019-030215) (TP Morris *et
 al*. Proposals on Kaplan–Meier plots in medical research and a survey of
 stakeholder views: KMunicate. *BMJ Open*, 2019, 9:e030215).
 
-## Installation
+Installation
+------------
 
 You can install {KMunicate} from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("ellessenne/KMunicate-package")
-```
+    # install.packages("devtools")
+    devtools::install_github("ellessenne/KMunicate-package")
 
-## Warning :warning:
+Example
+-------
 
-The numbers in the risk table sometimes do not add up at the moment.
-This follows from an issue with the {survival} package, see
-[here](https://github.com/ellessenne/KMunicate-package/issues/6) and
-[here](https://github.com/therneau/survival/issues/119) for more
-details.
-
-## Example
-
-``` r
-library(survival)
-library(KMunicate)
-```
+    library(survival)
+    library(KMunicate)
 
 The {KMunicate} package comes with a couple of bundled dataset, `cancer`
 and `brcancer`. The main function is named `KMunicate`:
 
-``` r
-KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
-time_scale <- seq(0, max(brcancer$rectime), by = 365)
-KMunicate(fit = KM, time_scale = time_scale)
-```
+    KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
+    time_scale <- seq(0, max(brcancer$rectime), by = 365)
+    KMunicate(fit = KM, time_scale = time_scale)
 
 <img src="man/figures/README-brcancer-1.png" width="90%" style="display: block; margin: auto;" />
 
-``` r
-KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
-time_scale <- seq(0, max(cancer2$studytime), by = 7)
-KMunicate(fit = KM, time_scale = time_scale)
-```
+    KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
+    time_scale <- seq(0, max(cancer2$studytime), by = 7)
+    KMunicate(fit = KM, time_scale = time_scale)
 
 <img src="man/figures/README-cancer-1.png" width="90%" style="display: block; margin: auto;" />
 
 You also might wonder, does this work with a single arm? Yes, yes it
 does:
 
-``` r
-KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
-time_scale <- seq(0, max(cancer2$studytime), by = 7)
-KMunicate(fit = KM, time_scale = time_scale)
-```
+    KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
+    time_scale <- seq(0, max(cancer2$studytime), by = 7)
+    KMunicate(fit = KM, time_scale = time_scale)
 
 <img src="man/figures/README-cancer-single-1.png" width="90%" style="display: block; margin: auto;" />
 
-## Customise Risk Table
+Customise Risk Table
+--------------------
 
 By default, `KMunicate()` will build a risk table conform to the
 KMunicate style, e.g., with cumulative number of events and censored
 (the column-wise sum is equal to the total number of individuals at risk
 per arm):
 
-``` r
-KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
-time_scale <- seq(0, max(brcancer$rectime), by = 365)
-KMunicate(fit = KM, time_scale = time_scale)
-```
+    KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
+    time_scale <- seq(0, max(brcancer$rectime), by = 365)
+    KMunicate(fit = KM, time_scale = time_scale)
 
 <img src="man/figures/README-brcancer-KMunicate-1.png" width="90%" style="display: block; margin: auto;" />
 
@@ -95,9 +79,7 @@ Alternatively, it is possible to customise the risk table via the
 number of events and censored, just pass the `survfit` value to the
 `.risk_table` argument:
 
-``` r
-KMunicate(fit = KM, time_scale = time_scale, .risk_table = "survfit")
-```
+    KMunicate(fit = KM, time_scale = time_scale, .risk_table = "survfit")
 
 <img src="man/figures/README-brcancer-survfit-1.png" width="90%" style="display: block; margin: auto;" />
 
@@ -106,22 +88,19 @@ This is the default output of the `summary.survfit()` function.
 Finally, it is also possible to fully omit the risk table by setting
 `.risk_table = NULL`:
 
-``` r
-KMunicate(fit = KM, time_scale = time_scale, .risk_table = NULL)
-```
+    KMunicate(fit = KM, time_scale = time_scale, .risk_table = NULL)
 
 <img src="man/figures/README-brcancer-NULL-1.png" width="90%" style="display: block; margin: auto;" />
 
-## Custom Fonts
+Custom Fonts
+------------
 
 Assuming you have set up your computer to use custom fonts with
 `ggplot2`, customising your KMunicate-style plot is trivial. All you
 have to do is pass the font name as the `.ff` argument:
 
-``` r
-KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
-time_scale <- seq(0, max(cancer2$studytime), by = 7)
-KMunicate(fit = KM, time_scale = time_scale, .ff = "Victor Mono")
-```
+    KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
+    time_scale <- seq(0, max(cancer2$studytime), by = 7)
+    KMunicate(fit = KM, time_scale = time_scale, .ff = "Victor Mono")
 
 <img src="man/figures/README-cancer-single-ff-1.png" width="90%" style="display: block; margin: auto;" />

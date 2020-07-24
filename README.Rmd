@@ -39,11 +39,6 @@ You can install {KMunicate} from [GitHub](https://github.com/) with:
 devtools::install_github("ellessenne/KMunicate-package")
 ```
 
-## Warning :warning:
-
-The numbers in the risk table sometimes do not add up at the moment. 
-This follows from an issue with the {survival} package, see [here](https://github.com/ellessenne/KMunicate-package/issues/6) and [here](https://github.com/therneau/survival/issues/119) for more details.
-
 ## Example
 
 ```{r packages}
