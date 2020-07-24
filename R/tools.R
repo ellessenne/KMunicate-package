@@ -20,6 +20,7 @@
 #' @keywords internal
 .fortify_summary <- function(fit, time_scale, risk_table) {
   summ <- summary(fit, times = time_scale, extend = TRUE)
+
   d <- data.frame(
     time = summ$time,
     n.risk = summ$n.risk,
@@ -40,9 +41,17 @@
     dsplit <- lapply(dsplit, function(x) {
       x$n.event <- cumsum(x$n.event)
       x$n.censor <- cumsum(x$n.censor)
+      # Solve (for now) inconsistency between n.risk and the rest
+      # Trusting n.censor and n.event for now...
+      # See (and follow-up) over at:
+      # - https://github.com/ellessenne/KMunicate-package/issues/6
+      # - https://github.com/therneau/survival/issues/119
+      x$n.risk <- max(x$n.risk) - x$n.censor - x$n.event
       x
     })
     d <- do.call(rbind, dsplit)
   }
+
+  # Return d
   return(d)
 }
