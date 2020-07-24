@@ -31,15 +31,16 @@ Depends:
 Imports:
  checkmate,
  cowplot,
- ggfortify,
  ggplot2,
  pammtools,
  tidyr
 Suggests:
+ broom,
  covr,
  devtools,
  extrafont,
  knitr,
  rmarkdown,
+ simsurv,
  testthat,
  usethis

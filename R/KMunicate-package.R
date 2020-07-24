@@ -3,7 +3,7 @@
 #' @name KMunicate_package
 #' @docType package
 #' @author Alessandro Gasparini (alessandro.gasparini@@ki.se)
-#' @import cowplot ggfortify ggplot2 pammtools survival tidyr
+#' @import cowplot ggplot2 pammtools survival tidyr
 NULL
 
 # Quiets concerns of R CMD check re: variable names used internally

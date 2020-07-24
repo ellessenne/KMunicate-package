@@ -55,7 +55,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .theme = NULL,
   if (!arg_checks$isEmpty()) checkmate::reportAssertions(arg_checks)
 
   ### Fortify data
-  data <- ggplot2::fortify(fit, surv.connect = TRUE)
+  data <- .fortify(fit)
 
   ### Create plot
   plot <- ggplot2::ggplot(data, ggplot2::aes(x = time, y = surv, ymin = lower, ymax = upper))

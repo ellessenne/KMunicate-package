@@ -1,4 +1,23 @@
 #' @keywords internal
+.fortify <- function(fit) {
+  fit = survival::survfit0(x = fit)
+  out = data.frame(
+    time = fit$time,
+    n.risk = fit$n.risk,
+    n.event = fit$n.event,
+    n.censor = fit$n.censor,
+    surv = fit$surv,
+    lower = fit$lower,
+    upper = fit$upper
+  )
+  if ("strata" %in% names(fit)) {
+    out$strata <- rep(names(fit$strata), times = as.numeric(fit$strata))
+    out$strata <- factor(out$strata, levels = names(fit$strata), labels = gsub(".*=", "", names(fit$strata)))
+  }
+  return(out)
+}
+
+#' @keywords internal
 .fortify_summary <- function(fit, time_scale, risk_table) {
   summ <- summary(fit, times = time_scale, extend = TRUE)
   d <- data.frame(
@@ -26,9 +45,4 @@
     d <- do.call(rbind, dsplit)
   }
   return(d)
-}
-
-#' @keywords internal
-.fortify <- function() {
-
 }
