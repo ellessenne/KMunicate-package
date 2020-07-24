@@ -1,7 +1,7 @@
 #' @keywords internal
 .fortify <- function(fit) {
-  fit = survival::survfit0(x = fit)
-  out = data.frame(
+  fit <- survival::survfit0(x = fit)
+  out <- data.frame(
     time = fit$time,
     n.risk = fit$n.risk,
     n.event = fit$n.event,
