@@ -1,3 +1,3 @@
-# KMunicate 0.0.1-9000
+# KMunicate 0.0.2
 
 * Initial release.
