@@ -3,7 +3,7 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   KMunicate: KMunicate.html
-last_built: 2020-07-27T09:05Z
+last_built: 2020-08-04T07:40Z
 urls:
   reference: https://ellessenne.github.io/KMunicate-package/reference
   article: https://ellessenne.github.io/KMunicate-package/articles

@@ -25,7 +25,14 @@ stakeholder views: KMunicate. *BMJ Open*, 2019, 9:e030215).
 Installation
 ------------
 
-You can install {KMunicate} from [GitHub](https://github.com/) with:
+You can install {KMunicate} from
+[CRAN](https://CRAN.R-project.org/package=KMunicate) by typing the
+following in your R console:
+
+    install.packages("KMunicate")
+
+Alternatively, you can install the dev version of {KMunicate} from
+[GitHub](https://github.com/ellessenne/KMunicate-package/) with:
 
     # install.packages("devtools")
     devtools::install_github("ellessenne/KMunicate-package")
