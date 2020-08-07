@@ -14,6 +14,8 @@ status](https://ci.appveyor.com/api/projects/status/github/ellessenne/KMunicate-
 coverage](https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg)](https://codecov.io/gh/ellessenne/KMunicate-package?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/KMunicate)](https://CRAN.R-project.org/package=KMunicate)
+[![CRAN\_Logs\_Badge](http://cranlogs.r-pkg.org/badges/KMunicate)](https://cran.r-project.org/package=KMunicate)
+[![CRAN\_Logs\_Badge\_Total](http://cranlogs.r-pkg.org/badges/grand-total/KMunicate)](https://cran.r-project.org/package=KMunicate)
 <!-- badges: end -->
 
 The goal of {KMunicate} is to produce Kaplan–Meier plots in the style
