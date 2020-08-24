@@ -129,10 +129,12 @@
   <span class='no'>fit</span>,
   <span class='no'>time_scale</span>,
   <span class='kw'>.risk_table</span> <span class='kw'>=</span> <span class='st'>"KMunicate"</span>,
+  <span class='kw'>.reverse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>.theme</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>.color_scale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>.fill_scale</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>.xlab</span> <span class='kw'>=</span> <span class='st'>"Time"</span>,
+  <span class='kw'>.ylab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='no'>.reverse</span>, <span class='st'>"Estimated (1 - survival)"</span>, <span class='st'>"Estimated survival"</span>),
   <span class='kw'>.alpha</span> <span class='kw'>=</span> <span class='fl'>0.25</span>,
   <span class='kw'>.rel_heights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>.ff</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
@@ -151,7 +153,11 @@
     </tr>
     <tr>
       <th>.risk_table</th>
-      <td><p>This arguments define the type of risk table that is produced.
+      <td><p>This arguments define the type of risk table that is produced.</p></td>
+    </tr>
+    <tr>
+      <th>.reverse</th>
+      <td><p>If <code>reverse = TRUE</code>, then the plot uses 1 - survival probability on the y-axis.
 Defaults to <code>KMunicate</code>, where the cumulative number of events and censored are calculated.
 Another possibility is <code>survfit</code>, which will use the default numbers returned by <code>summary.survfit</code> (e.g. number of events and censored per interval).
 <code>.risk_table</code> can also be <code>NULL</code>, in which case the risk table will be omitted from the plot.</p></td>
@@ -171,6 +177,10 @@ Another possibility is <code>survfit</code>, which will use the default numbers 
     <tr>
       <th>.xlab</th>
       <td><p>Label for the horizontal axis, defaults to <em>Time</em>.</p></td>
+    </tr>
+    <tr>
+      <th>.ylab</th>
+      <td><p>Label for the vertical axis, defaults to <em>Estimated survival</em> if <code>.reverse = FALSE</code>, to <em>Estimated (1 - survival)</em> otherwise.</p></td>
     </tr>
     <tr>
       <th>.alpha</th>

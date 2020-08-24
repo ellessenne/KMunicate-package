@@ -3,6 +3,7 @@
 #' @param fit A `survfit` object.
 #' @param time_scale The time scale that will be used for the x-axis and for the summary tables.
 #' @param .risk_table This arguments define the type of risk table that is produced.
+#' @param .reverse If `reverse = TRUE`, then the plot uses 1 - survival probability on the y-axis.
 #' Defaults to `KMunicate`, where the cumulative number of events and censored are calculated.
 #' Another possibility is `survfit`, which will use the default numbers returned by `summary.survfit` (e.g. number of events and censored per interval).
 #' `.risk_table` can also be `NULL`, in which case the risk table will be omitted from the plot.
@@ -10,6 +11,7 @@
 #' @param .color_scale Colour scale used for the plot. Has to be a `scale_colour_*` component, and defaults to `NULL` where the default colour scales will be used.
 #' @param .fill_scale Fill scale used for the plot. Has to be a `scale_fill_*` component, and defaults to `NULL` where the default fill scales will be used.
 #' @param .xlab Label for the horizontal axis, defaults to _Time_.
+#' @param .ylab Label for the vertical axis, defaults to _Estimated survival_ if `.reverse = FALSE`, to _Estimated (1 - survival)_ otherwise.
 #' @param .alpha Transparency of the point-wise confidence intervals
 #' @param .rel_heights Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See [cowplot::plot_grid()] for more details on how to use this argument.
 #' @param .ff A string used to define a base font for the plot.
@@ -22,7 +24,7 @@
 #' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
 #' time_scale <- seq(0, max(cancer2$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
-KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .alpha = 0.25, .rel_heights = NULL, .ff = NULL) {
+KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FALSE, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"), .alpha = 0.25, .rel_heights = NULL, .ff = NULL) {
 
   ### Check arguments
   arg_checks <- checkmate::makeAssertCollection()
@@ -30,6 +32,8 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .theme = NULL,
   checkmate::assert_class(x = fit, classes = "survfit", add = arg_checks)
   # 'time_scale' must be a numeric vector
   checkmate::assert_numeric(x = time_scale, add = arg_checks)
+  # '.reverse' must be a logical value
+  checkmate::assert_logical(x = .reverse, len = 1, add = arg_checks)
   # '.risk_table' must be a vector of strings, can be NULL
   checkmate::assert_string(x = .risk_table, null.ok = TRUE, add = arg_checks)
   # '.risk_table' must have specific values
@@ -56,6 +60,12 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .theme = NULL,
 
   ### Fortify data
   data <- .fortify(fit)
+  # If .reverse, use 1 - survival probability
+  if (.reverse) {
+    data$surv <- 1 - data$surv
+    data$lower <- 1 - data$lower
+    data$upper <- 1 - data$upper
+  }
 
   ### Create plot
   plot <- ggplot2::ggplot(data, ggplot2::aes(x = time, y = surv, ymin = lower, ymax = upper))
@@ -69,7 +79,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .theme = NULL,
   plot <- plot +
     ggplot2::scale_x_continuous(breaks = time_scale) +
     ggplot2::coord_cartesian(ylim = c(0, 1), xlim = range(time_scale)) +
-    ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = "Estimated survival")
+    ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = .ylab)
   if (!is.null(.theme)) {
     plot <- plot + .theme
   } else if (!is.null(.ff)) {

@@ -8,10 +8,12 @@ KMunicate(
   fit,
   time_scale,
   .risk_table = "KMunicate",
+  .reverse = FALSE,
   .theme = NULL,
   .color_scale = NULL,
   .fill_scale = NULL,
   .xlab = "Time",
+  .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"),
   .alpha = 0.25,
   .rel_heights = NULL,
   .ff = NULL
@@ -22,7 +24,9 @@ KMunicate(
 
 \item{time_scale}{The time scale that will be used for the x-axis and for the summary tables.}
 
-\item{.risk_table}{This arguments define the type of risk table that is produced.
+\item{.risk_table}{This arguments define the type of risk table that is produced.}
+
+\item{.reverse}{If \code{reverse = TRUE}, then the plot uses 1 - survival probability on the y-axis.
 Defaults to \code{KMunicate}, where the cumulative number of events and censored are calculated.
 Another possibility is \code{survfit}, which will use the default numbers returned by \code{summary.survfit} (e.g. number of events and censored per interval).
 \code{.risk_table} can also be \code{NULL}, in which case the risk table will be omitted from the plot.}
@@ -34,6 +38,8 @@ Another possibility is \code{survfit}, which will use the default numbers return
 \item{.fill_scale}{Fill scale used for the plot. Has to be a \verb{scale_fill_*} component, and defaults to \code{NULL} where the default fill scales will be used.}
 
 \item{.xlab}{Label for the horizontal axis, defaults to \emph{Time}.}
+
+\item{.ylab}{Label for the vertical axis, defaults to \emph{Estimated survival} if \code{.reverse = FALSE}, to \emph{Estimated (1 - survival)} otherwise.}
 
 \item{.alpha}{Transparency of the point-wise confidence intervals}
 

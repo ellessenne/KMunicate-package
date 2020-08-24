@@ -78,6 +78,14 @@ time_scale <- seq(0, max(cancer2$studytime), by = 7)
 KMunicate(fit = KM, time_scale = time_scale)
 ```
 
+Finally, you can also plot 1 - survival by using the argument `.reverse = TRUE`:
+
+```{r brcancer-reverse, fig.height = 7, fig.width = 7 / sqrt(2)}
+KM <- survfit(Surv(rectime, censrec) ~ hormon, data = brcancer)
+time_scale <- seq(0, max(brcancer$rectime), by = 365)
+KMunicate(fit = KM, time_scale = time_scale, .reverse = TRUE)
+```
+
 ## Customise Risk Table
 
 By default, `KMunicate()` will build a risk table conform to the KMunicate style, e.g., with cumulative number of events and censored (the column-wise sum is equal to the total number of individuals at risk per arm):

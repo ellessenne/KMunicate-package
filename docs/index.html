@@ -112,30 +112,35 @@
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>time_scale &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(cancer2<span class="op">$</span>studytime), <span class="dt">by =</span> <span class="dv">7</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale)</span></code></pre></div>
 <p><img src="reference/figures/README-cancer-single-1.png" width="90%" style="display: block; margin: auto;"></p>
+<p>Finally, you can also plot 1 - survival by using the argument <code>.reverse = TRUE</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>KM &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(rectime, censrec) <span class="op">~</span><span class="st"> </span>hormon, <span class="dt">data =</span> brcancer)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>time_scale &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(brcancer<span class="op">$</span>rectime), <span class="dt">by =</span> <span class="dv">365</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale, <span class="dt">.reverse =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="reference/figures/README-brcancer-reverse-1.png" width="90%" style="display: block; margin: auto;"></p>
 </div>
 <div id="customise-risk-table" class="section level2">
 <h2 class="hasAnchor">
 <a href="#customise-risk-table" class="anchor"></a>Customise Risk Table</h2>
 <p>By default, <code><a href="reference/KMunicate.html">KMunicate()</a></code> will build a risk table conform to the KMunicate style, e.g., with cumulative number of events and censored (the column-wise sum is equal to the total number of individuals at risk per arm):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>KM &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(rectime, censrec) <span class="op">~</span><span class="st"> </span>hormon, <span class="dt">data =</span> brcancer)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>time_scale &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(brcancer<span class="op">$</span>rectime), <span class="dt">by =</span> <span class="dv">365</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>KM &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(rectime, censrec) <span class="op">~</span><span class="st"> </span>hormon, <span class="dt">data =</span> brcancer)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>time_scale &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(brcancer<span class="op">$</span>rectime), <span class="dt">by =</span> <span class="dv">365</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-KMunicate-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>Alternatively, it is possible to customise the risk table via the <code>.risk_table</code> argument. For instance, if one wants to have interval-wise number of events and censored, just pass the <code>survfit</code> value to the <code>.risk_table</code> argument:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale, <span class="dt">.risk_table =</span> <span class="st">"survfit"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale, <span class="dt">.risk_table =</span> <span class="st">"survfit"</span>)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-survfit-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>This is the default output of the <code>summary.survfit()</code> function.</p>
 <p>Finally, it is also possible to fully omit the risk table by setting <code>.risk_table = NULL</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale, <span class="dt">.risk_table =</span> <span class="ot">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale, <span class="dt">.risk_table =</span> <span class="ot">NULL</span>)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-NULL-1.png" width="90%" style="display: block; margin: auto;"></p>
 </div>
 <div id="custom-fonts" class="section level2">
 <h2 class="hasAnchor">
 <a href="#custom-fonts" class="anchor"></a>Custom Fonts</h2>
 <p>Assuming you have set up your computer to use custom fonts with <code>ggplot2</code>, customising your KMunicate-style plot is trivial. All you have to do is pass the font name as the <code>.ff</code> argument:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>KM &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(studytime, died) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> cancer2)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>time_scale &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(cancer2<span class="op">$</span>studytime), <span class="dt">by =</span> <span class="dv">7</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale, <span class="dt">.ff =</span> <span class="st">"Victor Mono"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>KM &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(studytime, died) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> cancer2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>time_scale &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">max</span>(cancer2<span class="op">$</span>studytime), <span class="dt">by =</span> <span class="dv">7</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="kw">KMunicate</span>(<span class="dt">fit =</span> KM, <span class="dt">time_scale =</span> time_scale, <span class="dt">.ff =</span> <span class="st">"Victor Mono"</span>)</span></code></pre></div>
 <p><img src="reference/figures/README-cancer-single-ff-1.png" width="90%" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -174,6 +179,8 @@
 <li><a href="https://ci.appveyor.com/project/ellessenne/KMunicate-package"><img src="https://ci.appveyor.com/api/projects/status/github/ellessenne/KMunicate-package?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
 <li><a href="https://codecov.io/gh/ellessenne/KMunicate-package?branch=master"><img src="https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://CRAN.R-project.org/package=KMunicate"><img src="https://www.r-pkg.org/badges/version/KMunicate" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=KMunicate"><img src="http://cranlogs.r-pkg.org/badges/KMunicate" alt="CRAN_Logs_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=KMunicate"><img src="http://cranlogs.r-pkg.org/badges/grand-total/KMunicate" alt="CRAN_Logs_Badge_Total"></a></li>
 </ul>
 </div>
 </div>
