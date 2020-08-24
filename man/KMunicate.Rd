@@ -16,7 +16,8 @@ KMunicate(
   .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"),
   .alpha = 0.25,
   .rel_heights = NULL,
-  .ff = NULL
+  .ff = NULL,
+  .risk_table_base_size = 11
 )
 }
 \arguments{
@@ -46,6 +47,8 @@ Another possibility is \code{survfit}, which will use the default numbers return
 \item{.rel_heights}{Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See \code{\link[cowplot:plot_grid]{cowplot::plot_grid()}} for more details on how to use this argument.}
 
 \item{.ff}{A string used to define a base font for the plot.}
+
+\item{.risk_table_base_size}{Base font size for the risk table, given in pts. Defaults to 11.}
 }
 \value{
 A KMunicate-style \code{ggplot} object.

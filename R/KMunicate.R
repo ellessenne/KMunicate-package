@@ -15,6 +15,8 @@
 #' @param .alpha Transparency of the point-wise confidence intervals
 #' @param .rel_heights Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See [cowplot::plot_grid()] for more details on how to use this argument.
 #' @param .ff A string used to define a base font for the plot.
+#' @param .risk_table_base_size Base font size for the risk table, given in pts. Defaults to 11.
+#'
 #' @return A KMunicate-style `ggplot` object.
 #' @export
 #'
@@ -24,7 +26,7 @@
 #' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
 #' time_scale <- seq(0, max(cancer2$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
-KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FALSE, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"), .alpha = 0.25, .rel_heights = NULL, .ff = NULL) {
+KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FALSE, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .xlab = "Time", .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"), .alpha = 0.25, .rel_heights = NULL, .ff = NULL, .risk_table_base_size = 11) {
 
   ### Check arguments
   arg_checks <- checkmate::makeAssertCollection()
@@ -115,7 +117,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
       p <- p +
         ggplot2::scale_x_continuous(breaks = time_scale) +
         ggplot2::coord_cartesian(xlim = range(time_scale)) +
-        ggplot2::theme_void()
+        ggplot2::theme_void(base_size = .risk_table_base_size)
       if (is.null(.ff)) {
         p <- p + ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic"))
       } else {
