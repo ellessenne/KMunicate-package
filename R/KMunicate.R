@@ -118,7 +118,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
         ggplot2::scale_x_continuous(breaks = time_scale) +
         ggplot2::coord_cartesian(xlim = range(time_scale)) +
         ggplot2::theme_void(base_size = .risk_table_base_size) +
-        ggplot2::theme(plot.margin = ggplot2::margin(rep(0, 4), "pt"))
+        ggplot2::theme(plot.margin = ggplot2::margin(0, 0, 0, 0, "cm"))
       if (is.null(.ff)) {
         p <- p + ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic"))
       } else {
