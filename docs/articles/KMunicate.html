@@ -153,7 +153,8 @@
 <span class="no">ts</span>
 <span class="co">#&gt; [1]    0.00  664.75 1329.50 1994.25 2659.00</span></pre></body></html></div>
 <p>Finally, we can pass <code>fit</code> and <code>ts</code> to the <code><a href="../reference/KMunicate.html">KMunicate()</a></code> function to simply obtain a plot:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>)
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p1-1.png" width="75%" style="display: block; margin: auto;"></p>
 </div>
 <div id="multiple-arms-plot" class="section level2">
@@ -168,14 +169,20 @@
 <span class="co">#&gt; hormon=0 440    205   1528    1296    1814</span>
 <span class="co">#&gt; hormon=1 246     94   2018    1918      NA</span></pre></body></html></div>
 <p>We will be using the same time scale as before (<code>ts</code>), and the call to <code><a href="../reference/KMunicate.html">KMunicate()</a></code> is analogous:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>)
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p2-1.png" width="75%" style="display: block; margin: auto;"></p>
 </div>
 <div id="customisation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#customisation" class="anchor"></a>Customisation</h2>
 <p>The <code><a href="../reference/KMunicate.html">KMunicate()</a></code> function contains a few options to customise the produced plot. First, we can pass a <code>ggplot2</code> theme to the <code>.theme</code> argument:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.theme</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())</pre></body></html></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.theme</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>())
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p3-1.png" width="75%" style="display: block; margin: auto;"></p>
 <p>We can also pass custom colour (and fill) scales:</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(
@@ -183,22 +190,37 @@
   <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>,
   <span class="kw">.color_scale</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"qual"</span>, <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"Set2"</span>),
   <span class="kw">.fill_scale</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"qual"</span>, <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"Set2"</span>)
-)</pre></body></html></div>
+)
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p4-1.png" width="75%" style="display: block; margin: auto;"></p>
 <p>We can customise the transparency of the point-wise confidence intervals via the <code>.alpha</code> argument:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.alpha</span> <span class="kw">=</span> <span class="fl">0.1</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.alpha</span> <span class="kw">=</span> <span class="fl">0.1</span>)
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p5-1.png" width="75%" style="display: block; margin: auto;"></p>
 <p>We can customise the label of the horizontal axis:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.xlab</span> <span class="kw">=</span> <span class="st">"New Label (Time in Days, Actually)"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.xlab</span> <span class="kw">=</span> <span class="st">"New Label (Time in Days, Actually)"</span>)
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p6-1.png" width="75%" style="display: block; margin: auto;"></p>
 <p>We can customise the relative size of risk tables and plots, although the default <em>should</em> generally work fine for most scenarios:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.rel_heights</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.rel_heights</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>))
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p7-1.png" width="75%" style="display: block; margin: auto;"></p>
 <p>Finally, assuming you have set up your computer and R session to support custom fonts, you can produce plots with custom fonts:</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">extrafont</span>)
 <span class="co"># extrafont::font_import()</span>
 <span class="kw pkg">extrafont</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/extrafont/man/loadfonts.html">loadfonts</a></span>()</pre></body></html></div>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.ff</span> <span class="kw">=</span> <span class="st">"Times New Roman"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span>(<span class="kw">fit</span> <span class="kw">=</span> <span class="no">fit2</span>, <span class="kw">time_scale</span> <span class="kw">=</span> <span class="no">ts</span>, <span class="kw">.ff</span> <span class="kw">=</span> <span class="st">"Times New Roman"</span>)
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/p8-1.png" width="75%" style="display: block; margin: auto;"></p>
 </div>
 <div id="a-better-plot" class="section level1">
@@ -213,7 +235,10 @@
   <span class="kw">.color_scale</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"qual"</span>, <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"Set2"</span>),
   <span class="kw">.fill_scale</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"qual"</span>, <span class="kw">palette</span> <span class="kw">=</span> <span class="st">"Set2"</span>),
   <span class="kw">.ff</span> <span class="kw">=</span> <span class="st">"Roboto Condensed"</span>
-)</pre></body></html></div>
+)
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span>
+
+<span class="co">#&gt; Warning in unit(c(t, r, b, l), unit): NAs introduced by coercion</span></pre></body></html></div>
 <p><img src="KMunicate_files/figure-html/better-plot-1.png" width="75%" style="display: block; margin: auto;"></p>
 </div>
   </div>

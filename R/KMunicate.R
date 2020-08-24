@@ -110,14 +110,15 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
     tds <- lapply(seq_along(tds), function(i) {
       p <- ggplot2::ggplot(tds[[i]], ggplot2::aes(x = time, y = name, label = value))
       if (is.null(.ff)) {
-        p <- p + ggplot2::geom_text()
+        p <- p + ggplot2::geom_text(size = .risk_table_base_size / (14 / 5))
       } else {
-        p <- p + ggplot2::geom_text(mapping = ggplot2::aes(family = .ff))
+        p <- p + ggplot2::geom_text(mapping = ggplot2::aes(family = .ff), size = .risk_table_base_size / (14 / 5))
       }
       p <- p +
         ggplot2::scale_x_continuous(breaks = time_scale) +
         ggplot2::coord_cartesian(xlim = range(time_scale)) +
-        ggplot2::theme_void(base_size = .risk_table_base_size)
+        ggplot2::theme_void(base_size = .risk_table_base_size) +
+        ggplot2::theme(plot.margin = ggplot2::margin(rep(0, 4), "pt"))
       if (is.null(.ff)) {
         p <- p + ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic"))
       } else {
