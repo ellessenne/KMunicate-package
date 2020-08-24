@@ -14,6 +14,8 @@ testthat::test_that("Output is a ggplot — multiple arms", {
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .theme = ggplot2::theme_bw()), class = c("gg", "ggplot"))
 
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .reverse = TRUE), class = c("gg", "ggplot"))
+
   suppressMessages({
     library(extrafont)
     extrafont::loadfonts()
@@ -43,6 +45,8 @@ testthat::test_that("Output is a ggplot — single arms", {
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .rel_heights = c(1, 1, 1)), class = c("gg", "ggplot"))
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .theme = ggplot2::theme_bw()), class = c("gg", "ggplot"))
+
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .reverse = TRUE), class = c("gg", "ggplot"))
 
   suppressMessages({
     library(extrafont)

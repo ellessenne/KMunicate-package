@@ -49,14 +49,17 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
   # '.color_scale' and '.fill_scale' must pass ggplot2::is.ggproto()
   if (!is.null(.color_scale)) checkmate::assert_true(x = ggplot2::is.ggproto(.color_scale), add = arg_checks)
   if (!is.null(.fill_scale)) checkmate::assert_true(x = ggplot2::is.ggproto(.fill_scale), add = arg_checks)
-  # '.xlab' must be a string
+  # '.xlab', '.ylab' must be a string
   checkmate::assert_string(x = .xlab, add = arg_checks)
+  checkmate::assert_string(x = .ylab, add = arg_checks)
   # '.alpha' must be a number
   checkmate::assert_number(x = .alpha, add = arg_checks)
   # '.rel_heights' must be a numeric vector or NULL
   checkmate::assert_numeric(x = .rel_heights, null.ok = TRUE, add = arg_checks)
   # '.ff' must be a string or NULL
   checkmate::assert_string(x = .ff, null.ok = TRUE, add = arg_checks)
+  # '.risk_table_base_size' must be a number
+  checkmate::assert_number(x = .risk_table_base_size, add = arg_checks)
   # Report
   if (!arg_checks$isEmpty()) checkmate::reportAssertions(arg_checks)
 

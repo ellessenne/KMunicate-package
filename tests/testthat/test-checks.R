@@ -26,6 +26,14 @@ testthat::test_that("Arg: .risk_table", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = time_scale))
 })
 
+testthat::test_that("Arg: .reverse", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .reverse = "1"))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .reverse = 1))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .reverse = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .reverse = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .reverse = time_scale))
+})
+
 testthat::test_that("Arg: .theme", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .theme = 1))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .theme = "1"))
@@ -66,6 +74,14 @@ testthat::test_that("Arg: .xlab", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .xlab = time_scale))
 })
 
+testthat::test_that("Arg: .ylab", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ylab = 1))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ylab = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ylab = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ylab = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ylab = time_scale))
+})
+
 testthat::test_that("Arg: .alpha", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .alpha = "1"))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .alpha = TRUE))
@@ -87,4 +103,12 @@ testthat::test_that("Arg: .ff", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = brcancer))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = KM))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .ff = time_scale))
+})
+
+testthat::test_that("Arg: .risk_table_base_size", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = "1"))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = time_scale))
 })
