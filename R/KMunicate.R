@@ -91,7 +91,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
     plot <- plot + ggplot2::theme_gray(base_family = .ff)
   }
   plot <- plot +
-    ggplot2::theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank())
+    ggplot2::theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank(), plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
   if (!is.null(.color_scale)) {
     plot <- plot + .color_scale
   }
@@ -113,15 +113,15 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
     tds <- lapply(seq_along(tds), function(i) {
       p <- ggplot2::ggplot(tds[[i]], ggplot2::aes(x = time, y = name, label = value))
       if (is.null(.ff)) {
-        p <- p + ggplot2::geom_text(size = .risk_table_base_size / (14 / 5))
+        p <- p + ggplot2::geom_text(size = .risk_table_base_size / 3)
       } else {
-        p <- p + ggplot2::geom_text(mapping = ggplot2::aes(family = .ff), size = .risk_table_base_size / (14 / 5))
+        p <- p + ggplot2::geom_text(mapping = ggplot2::aes(family = .ff), size = .risk_table_base_size / 3)
       }
       p <- p +
         ggplot2::scale_x_continuous(breaks = time_scale) +
         ggplot2::coord_cartesian(xlim = range(time_scale)) +
         ggplot2::theme_void(base_size = .risk_table_base_size) +
-        ggplot2::theme(plot.margin = ggplot2::margin(0, 0, 0, 0, "cm"))
+        ggplot2::theme(plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
       if (is.null(.ff)) {
         p <- p + ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic"))
       } else {
