@@ -24,10 +24,16 @@ testthat::test_that("Output is a ggplot — multiple arms", {
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .color_scale = ggplot2::scale_color_discrete()), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = ggplot2::scale_fill_discrete()), class = c("gg", "ggplot"))
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = ggplot2::scale_linetype_discrete()), class = c("gg", "ggplot"))
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = ggplot2::annotate(geom = "text", x = 100, y = 0.5, label = "Text")), class = c("gg", "ggplot"))
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = "KMunicate"), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = "survfit"), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = NULL), class = c("gg", "ggplot"))
+
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .size = 3), class = c("gg", "ggplot"))
+
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = c(0.5, 0.5)), class = c("gg", "ggplot"))
 })
 
 KM <- survival::survfit(survival::Surv(rectime, censrec) ~ 1, data = brcancer)
@@ -56,8 +62,14 @@ testthat::test_that("Output is a ggplot — single arms", {
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .color_scale = ggplot2::scale_color_discrete()), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = ggplot2::scale_fill_discrete()), class = c("gg", "ggplot"))
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = ggplot2::scale_linetype_discrete()), class = c("gg", "ggplot"))
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = ggplot2::annotate(geom = "text", x = 100, y = 0.5, label = "Text")), class = c("gg", "ggplot"))
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = "KMunicate"), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = "survfit"), class = c("gg", "ggplot"))
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table = NULL), class = c("gg", "ggplot"))
+
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .size = 3), class = c("gg", "ggplot"))
+
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = c(0.5, 0.5)), class = c("gg", "ggplot"))
 })
