@@ -18,7 +18,7 @@
 #' @param .rel_heights Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See [cowplot::plot_grid()] for more details on how to use this argument.
 #' @param .ff A string used to define a base font for the plot.
 #' @param .risk_table_base_size Base font size for the risk table, given in pts. Defaults to 11.
-#' @param .size Thickness of each Kaplan-Meier curve. Defaults to 1.
+#' @param .size Thickness of each Kaplan-Meier curve. Defaults to `NULL`, where `ggplot2`'s default will be used.
 #' @param .legend_position Position of the legend in the plot. Defaults to `c(1, 1)`, which corresponds to _top-right_ of the plot. N.B.: Legend justification is modified accordingly. See [ggplot2::theme()] for more details on how to place the legend of the plot.
 #'
 #' @return A KMunicate-style `ggplot` object.
@@ -30,7 +30,7 @@
 #' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
 #' time_scale <- seq(0, max(cancer2$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
-KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FALSE, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .linetype_scale = NULL, .annotate = NULL, .xlab = "Time", .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"), .alpha = 0.25, .rel_heights = NULL, .ff = NULL, .risk_table_base_size = 11, .size = 1, .legend_position = c(1, 1)) {
+KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FALSE, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .linetype_scale = NULL, .annotate = NULL, .xlab = "Time", .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"), .alpha = 0.25, .rel_heights = NULL, .ff = NULL, .risk_table_base_size = 11, .size = NULL, .legend_position = c(1, 1)) {
 
   ### Check arguments
   arg_checks <- checkmate::makeAssertCollection()
@@ -66,7 +66,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
   checkmate::assert_string(x = .ff, null.ok = TRUE, add = arg_checks)
   # '.risk_table_base_size', '.size' must be a number
   checkmate::assert_number(x = .risk_table_base_size, add = arg_checks)
-  checkmate::assert_number(x = .size, add = arg_checks)
+  checkmate::assert_number(x = .size, null.ok = TRUE, add = arg_checks)
   # '.legend_position' must be a numeric vector of length 2
   checkmate::assert_numeric(x = .legend_position, len = 2, add = arg_checks)
   # Report
@@ -84,10 +84,21 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
   ### Create plot
   plot <- ggplot2::ggplot(data, ggplot2::aes(x = time, y = surv, ymin = lower, ymax = upper))
   if ("strata" %in% names(fit)) {
-    plot <- plot + pammtools::geom_stepribbon(ggplot2::aes(fill = strata), alpha = .alpha) +
-      ggplot2::geom_step(ggplot2::aes(color = strata, linetype = strata), size = .size)
+    plot <- plot + pammtools::geom_stepribbon(ggplot2::aes(fill = strata), alpha = .alpha)
+    if (!is.null(.size)) {
+      plot <- plot +
+        ggplot2::geom_step(ggplot2::aes(color = strata, linetype = strata), size = .size)
+    } else {
+      plot <- plot +
+        ggplot2::geom_step(ggplot2::aes(color = strata, linetype = strata))
+    }
   } else {
-    plot <- plot + pammtools::geom_stepribbon(alpha = .alpha, size = .size) +
+    if (!is.null(.size)) {
+      plot <- plot + pammtools::geom_stepribbon(alpha = .alpha, size = .size)
+    } else {
+      plot <- plot + pammtools::geom_stepribbon(alpha = .alpha)
+    }
+    plot <- plot +
       ggplot2::geom_step()
   }
   plot <- plot +
