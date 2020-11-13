@@ -12,12 +12,16 @@ KMunicate(
   .theme = NULL,
   .color_scale = NULL,
   .fill_scale = NULL,
+  .linetype_scale = NULL,
+  .annotate = NULL,
   .xlab = "Time",
   .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"),
   .alpha = 0.25,
   .rel_heights = NULL,
   .ff = NULL,
-  .risk_table_base_size = 11
+  .risk_table_base_size = 11,
+  .size = 1,
+  .legend.position = c(1, 1)
 )
 }
 \arguments{
@@ -34,9 +38,13 @@ Another possibility is \code{survfit}, which will use the default numbers return
 
 \item{.theme}{\code{ggplot} theme used by the plot. Defaults to \code{NULL}, where the default \code{ggplot} theme will be used.}
 
-\item{.color_scale}{Colour scale used for the plot. Has to be a \verb{scale_colour_*} component, and defaults to \code{NULL} where the default colour scales will be used.}
+\item{.color_scale}{Colour scale used for the plot. Has to be a \verb{scale_colour_*} component, and defaults to \code{NULL} where the default colour scale will be used.}
 
-\item{.fill_scale}{Fill scale used for the plot. Has to be a \verb{scale_fill_*} component, and defaults to \code{NULL} where the default fill scales will be used.}
+\item{.fill_scale}{Fill scale used for the plot. Has to be a \verb{scale_fill_*} component, and defaults to \code{NULL} where the default fill scale will be used.}
+
+\item{.linetype_scale}{Linetype scale used for the plot. Has to be a \verb{scale_linetype_*} component, and defaults to \code{NULL} where the default linetype scale will be used.}
+
+\item{.annotate}{Optional annotation to be added to the plot, e.g. using \code{\link[ggplot2:annotate]{ggplot2::annotate()}}. Defaults to \code{NULL}, where no extra annotation is added.}
 
 \item{.xlab}{Label for the horizontal axis, defaults to \emph{Time}.}
 
@@ -49,6 +57,10 @@ Another possibility is \code{survfit}, which will use the default numbers return
 \item{.ff}{A string used to define a base font for the plot.}
 
 \item{.risk_table_base_size}{Base font size for the risk table, given in pts. Defaults to 11.}
+
+\item{.size}{Thickness of each Kaplan-Meier curve. Defaults to 1.}
+
+\item{.legend.position}{Position of the legend in the plot. Defaults to \code{c(1, 1)}, which corresponds to \emph{top-right} of the plot. N.B.: Legend justification is modified accordingly. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for more details on how to place the legend of the plot.}
 }
 \value{
 A KMunicate-style \code{ggplot} object.

@@ -6,7 +6,10 @@ Authors@R: c(
          family = "Gasparini", 
          role = c("aut", "cre", "cph"), 
          email = "alessandro.gasparini@ki.se",
-         comment = c(ORCID = "0000-0002-8319-7624"))
+         comment = c(ORCID = "0000-0002-8319-7624")),
+  person(given = "Ary",
+         family = "Serpa Neto",
+         role = "ctb")
   )
 Description: Produce Kaplan–Meier plots in the style recommended following the KMunicate 
   study by Morris et al. (2019) <doi:10.1136/bmjopen-2019-030215>. The KMunicate style

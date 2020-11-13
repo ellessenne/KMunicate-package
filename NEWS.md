@@ -1,5 +1,12 @@
 # KMunicate (development version)
 
+### New features
+
+* New argument `.linetype_scale` to customise the linetype scale of the plot;
+* New argument `.annotate` to add custom annotations (and other stuff, in principle) to the plot;
+* New argument `.size` to customise the thickness (e.g. `size` argument, in `ggplot2` terms) of each Kaplan-Meier curve;
+* New argument `.legend.position` to customise the location of the plot legend. 
+
 # KMunicate 0.1.0
 
 ### New features

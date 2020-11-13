@@ -55,7 +55,7 @@ testthat::test_that("Arg: .color_scale", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .color_scale = ggplot2::theme_bw()))
 })
 
-testthat::test_that("Arg: .color_scale", {
+testthat::test_that("Arg: .fill_scale", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = 1))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = "1"))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = TRUE))
@@ -64,6 +64,28 @@ testthat::test_that("Arg: .color_scale", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = KM))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = time_scale))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .fill_scale = ggplot2::theme_bw()))
+})
+
+testthat::test_that("Arg: .linetype_scale", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = 1))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = "1"))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = rnorm))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = time_scale))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .linetype_scale = ggplot2::theme_bw()))
+})
+
+testthat::test_that("Arg: .annotate", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = 1))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = "1"))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = rnorm))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = time_scale))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .annotate = ggplot2::theme_bw()))
 })
 
 testthat::test_that("Arg: .xlab", {
@@ -111,4 +133,24 @@ testthat::test_that("Arg: .risk_table_base_size", {
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = brcancer))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = KM))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .risk_table_base_size = time_scale))
+})
+
+testthat::test_that("Arg: .size", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .size = "1"))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .size = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .size = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .size = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .size = time_scale))
+})
+
+testthat::test_that("Arg: .legend_position", {
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = "1"))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = TRUE))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = brcancer))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = KM))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = time_scale))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = 1))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = c("1", "2")))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = c(TRUE, FALSE)))
+  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = c("1", FALSE)))
 })
