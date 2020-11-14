@@ -12,6 +12,7 @@ pre_submission_test:
 	R -e "rhub::check_for_cran()"
 
 docs:
+	R -e "styler::style_dir(filetype = c('r', 'rmd'))"
 	R -e "devtools::document()"
 	R -e "devtools::build_readme()"
 	R -e "devtools::build_vignettes()"

@@ -168,7 +168,7 @@ KMunicate(
 )
 ```
 
-You can customise the location of the legend via the `.legend_position` argument:
+You can customise the location of the legend via the `.legend_position` argument, or you can even suppress it fully:
 
 ```{r legend_position, fig.height = 6 * sqrt(2), fig.width = 6}
 KMunicate(
@@ -176,6 +176,15 @@ KMunicate(
   time_scale = ts,
   .reverse = TRUE,
   .legend_position = c(0, 1)
+)
+```
+
+```{r legend_position_none, fig.height = 6 * sqrt(2), fig.width = 6}
+KMunicate(
+  fit = fit2,
+  time_scale = ts,
+  .reverse = TRUE,
+  .legend_position = "none"
 )
 ```
 
