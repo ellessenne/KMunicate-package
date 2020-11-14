@@ -144,7 +144,6 @@ testthat::test_that("Arg: .size", {
 })
 
 testthat::test_that("Arg: .legend_position", {
-  testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = "1"))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = TRUE))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = brcancer))
   testthat::expect_error(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = KM))

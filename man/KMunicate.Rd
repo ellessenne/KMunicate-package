@@ -60,7 +60,7 @@ Another possibility is \code{survfit}, which will use the default numbers return
 
 \item{.size}{Thickness of each Kaplan-Meier curve. Defaults to \code{NULL}, where \code{ggplot2}'s default will be used.}
 
-\item{.legend_position}{Position of the legend in the plot. Defaults to \code{c(1, 1)}, which corresponds to \emph{top-right} of the plot. N.B.: Legend justification is modified accordingly. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for more details on how to place the legend of the plot.}
+\item{.legend_position}{Position of the legend in the plot. Defaults to \code{c(1, 1)}, which corresponds to \emph{top-right} of the plot. It is also possible to pass a string, as in \code{ggplot2}, e.g. \code{"none"} to suppress the legend. N.B.: Legend justification is modified accordingly. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for more details on how to place the legend of the plot.}
 }
 \value{
 A KMunicate-style \code{ggplot} object.

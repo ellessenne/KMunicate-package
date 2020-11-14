@@ -34,6 +34,7 @@ testthat::test_that("Output is a ggplot — multiple arms", {
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .size = 3), class = c("gg", "ggplot"))
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = c(0.5, 0.5)), class = c("gg", "ggplot"))
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = "none"), class = c("gg", "ggplot"))
 })
 
 KM <- survival::survfit(survival::Surv(rectime, censrec) ~ 1, data = brcancer)
@@ -72,4 +73,5 @@ testthat::test_that("Output is a ggplot — single arms", {
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .size = 3), class = c("gg", "ggplot"))
 
   testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = c(0.5, 0.5)), class = c("gg", "ggplot"))
+  testthat::expect_s3_class(object = KMunicate(fit = KM, time_scale = time_scale, .legend_position = "none"), class = c("gg", "ggplot"))
 })

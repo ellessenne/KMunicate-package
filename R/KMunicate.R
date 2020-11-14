@@ -19,7 +19,7 @@
 #' @param .ff A string used to define a base font for the plot.
 #' @param .risk_table_base_size Base font size for the risk table, given in pts. Defaults to 11.
 #' @param .size Thickness of each Kaplan-Meier curve. Defaults to `NULL`, where `ggplot2`'s default will be used.
-#' @param .legend_position Position of the legend in the plot. Defaults to `c(1, 1)`, which corresponds to _top-right_ of the plot. N.B.: Legend justification is modified accordingly. See [ggplot2::theme()] for more details on how to place the legend of the plot.
+#' @param .legend_position Position of the legend in the plot. Defaults to `c(1, 1)`, which corresponds to _top-right_ of the plot. It is also possible to pass a string, as in `ggplot2`, e.g. `"none"` to suppress the legend. N.B.: Legend justification is modified accordingly. See [ggplot2::theme()] for more details on how to place the legend of the plot.
 #'
 #' @return A KMunicate-style `ggplot` object.
 #' @export
@@ -67,8 +67,8 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
   # '.risk_table_base_size', '.size' must be a number
   checkmate::assert_number(x = .risk_table_base_size, add = arg_checks)
   checkmate::assert_number(x = .size, null.ok = TRUE, add = arg_checks)
-  # '.legend_position' must be a numeric vector of length 2
-  checkmate::assert_numeric(x = .legend_position, len = 2, add = arg_checks)
+  # '.legend_position' must be a numeric vector of length 2, or a single string "none"
+  checkmate::assert_true(x = (is.numeric(.legend_position) & length(.legend_position) == 2) | (is.character(.legend_position) & length(.legend_position) == 1), add = arg_checks)
   # Report
   if (!arg_checks$isEmpty()) checkmate::reportAssertions(arg_checks)
 
@@ -111,7 +111,11 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
     plot <- plot + ggplot2::theme_gray(base_family = .ff)
   }
   plot <- plot +
-    ggplot2::theme(legend.position = .legend_position, legend.justification = .legend_position, legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank(), plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
+    ggplot2::theme(legend.position = .legend_position, legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank(), plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
+  if (length(.legend_position) > 1) {
+    plot <- plot +
+      ggplot2::theme(legend.justification = .legend_position)
+  }
   if (!is.null(.color_scale)) {
     plot <- plot + .color_scale
   }
