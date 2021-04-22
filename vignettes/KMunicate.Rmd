@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The {KMunicate} package can be used to produce Kaplan-Meier plots in the style recommended following the [KMunicate study](https://doi.org/10.1136/bmjopen-2019-030215) by TP Morris _et al_. (2019).
+The {KMunicate} package can be used to produce Kaplan-Meier plots in the style recommended following the [KMunicate study](https://bmjopen.bmj.com/content/9/9/e030215) by TP Morris _et al_. (2019).
 
 In this vignette, we'll see learn how to produce such a plot using the {KMunicate} package.
 
