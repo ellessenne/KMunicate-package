@@ -138,7 +138,7 @@ KMunicate(fit = KM, time_scale = time_scale, .ff = "Victor Mono")
 
 <img src="man/figures/README-cancer-single-ff-1.png" width="90%" style="display: block; margin: auto;" />
 
-## Furter customisation
+## Further Customisation
 
 Several options to further customise each plot are provided, see
 e.g. the introductory vignette for more details.

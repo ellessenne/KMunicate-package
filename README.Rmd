@@ -121,6 +121,6 @@ time_scale <- seq(0, max(cancer2$studytime), by = 7)
 KMunicate(fit = KM, time_scale = time_scale, .ff = "Victor Mono")
 ```
 
-## Furter customisation
+## Further Customisation
 
 Several options to further customise each plot are provided, see e.g. the introductory vignette for more details.
