@@ -36,7 +36,6 @@ Suggests:
     broom,
     covr,
     devtools,
-    extrafont,
     knitr,
     rmarkdown,
     simsurv,

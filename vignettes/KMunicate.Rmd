@@ -116,17 +116,8 @@ We can customise the relative size of risk tables and plots, although the defaul
 KMunicate(fit = fit2, time_scale = ts, .rel_heights = c(1, 1, 1))
 ```
 
-Finally, assuming you have set up your computer and R session to support custom fonts, you can produce plots with custom fonts:
-
-```{r fonts, warning = FALSE, message = FALSE}
-library(extrafont)
-# extrafont::font_import()
-extrafont::loadfonts()
-```
-
-```{r p8, fig.height = 6 * sqrt(2), fig.width = 6}
-KMunicate(fit = fit2, time_scale = ts, .ff = "Times New Roman")
-```
+Finally, assuming you have set up your computer and R session to support custom fonts (e.g. using a [`ragg`](https://CRAN.R-project.org/package=ragg) graphics device), you can produce plots with custom fonts via the `.ff` argument of the `KMunicate()` function.
+Examples of using `ragg` can be found [here](https://www.tidyverse.org/blog/2021/02/modern-text-features/).
 
 # A _Better_ Plot
 
@@ -136,11 +127,10 @@ We can combine all the above to obtain an (arguably) much better plot:
 KMunicate(
   fit = fit2,
   time_scale = ts,
-  .theme = ggplot2::theme_minimal(base_family = "Roboto Condensed"),
+  .theme = ggplot2::theme_minimal(),
   .xlab = "Time (in days)",
   .color_scale = ggplot2::scale_color_brewer(type = "qual", palette = "Set2"),
-  .fill_scale = ggplot2::scale_fill_brewer(type = "qual", palette = "Set2"),
-  .ff = "Roboto Condensed"
+  .fill_scale = ggplot2::scale_fill_brewer(type = "qual", palette = "Set2")
 )
 ```
 

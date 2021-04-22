@@ -1,5 +1,11 @@
 # KMunicate (development version)
 
+This is a minor release.
+
+### Changes
+
+* Updated vignette removing examples of custom fonts to avoid issues (and headaches) on CRAN and other testing environments.
+
 # KMunicate 0.2.0
 
 ### New features
