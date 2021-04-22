@@ -116,7 +116,9 @@ We can customise the relative size of risk tables and plots, although the defaul
 KMunicate(fit = fit2, time_scale = ts, .rel_heights = c(1, 1, 1))
 ```
 
-Finally, assuming you have set up your computer and R session to support custom fonts (e.g. using a [`ragg`](https://CRAN.R-project.org/package=ragg) graphics device), you can produce plots with custom fonts via the `.ff` argument of the `KMunicate()` function.
+# Custom Fonts
+
+Assuming you have set up your computer and R session to support custom fonts (e.g. using a [`ragg`](https://CRAN.R-project.org/package=ragg) graphics device), you can produce plots with custom fonts via the `.ff` argument of the `KMunicate()` function.
 Examples of using `ragg` can be found [here](https://www.tidyverse.org/blog/2021/02/modern-text-features/).
 
 # A _Better_ Plot
