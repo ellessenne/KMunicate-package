@@ -70,7 +70,7 @@
 
       
 
-      </header><script src="KMunicate_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="KMunicate_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Create KMunicate-Style Plots</h1>
@@ -122,8 +122,8 @@
 <span class="va">fit</span>
 <span class="co">#&gt; Call: survfit(formula = Surv(rectime, censrec) ~ 1, data = brcancer)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;       n  events  median 0.95LCL 0.95UCL </span>
-<span class="co">#&gt;     686     299    1807    1587    2030</span></code></pre></div>
+<span class="co">#&gt;        n events median 0.95LCL 0.95UCL</span>
+<span class="co">#&gt; [1,] 686    299   1807    1587    2030</span></code></pre></div>
 <p>Then, we need to define the horizontal axis of the plot. For instance, we can define 5 equally-spaced breaks between time zero and the largest observed time:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">brcancer</span><span class="op">$</span><span class="va">rectime</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
