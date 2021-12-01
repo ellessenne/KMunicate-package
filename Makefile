@@ -1,7 +1,17 @@
-.PHONY: style docs pre_submission_test
+.PHONY: pre_submission_test docs style revdep
 
-style:
-	R -e "styler::style_dir(filetype = c('r', 'rmd'))"
+pre_submission_test:
+	make docs
+	R -e "urlchecker::url_check()"
+	R -e "devtools::check(remote = TRUE, manual = TRUE)"
+	R -e "devtools::check_win_devel(quiet = TRUE)"
+	R -e "devtools::check_win_release(quiet = TRUE)"
+	R -e "devtools::check_win_oldrelease(quiet = TRUE)"
+	R -e "devtools::check_mac_release(quiet = TRUE)"
+	R -e "rhub::check_for_cran()"
+	R -e "rhub::check(platform = 'macos-m1-bigsur-release')"
+	make revdep
+	make style
 
 docs:
 	make style
@@ -10,10 +20,5 @@ docs:
 	R -e "devtools::build_vignettes()"
 	R -e "pkgdown::build_site()"
 
-pre_submission_test:
-	make docs
-	R -e "devtools::check()"
-	R -e "devtools::check_win_devel(quiet = TRUE)"
-	R -e "devtools::check_win_release(quiet = TRUE)"
-	R -e "devtools::check_win_oldrelease(quiet = TRUE)"
-	R -e "rhub::check_for_cran()"
+style:
+	R -e "styler::style_dir(filetype = c('r', 'rmd'))"
