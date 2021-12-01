@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ellessenne.github.io/KMunicate-package/404.html</loc>
+  </url>
+  <url>
+    <loc>https://ellessenne.github.io/KMunicate-package/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://ellessenne.github.io/KMunicate-package/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://ellessenne.github.io/KMunicate-package/articles/KMunicate.html</loc>
+  </url>
+  <url>
+    <loc>https://ellessenne.github.io/KMunicate-package/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ellessenne.github.io/KMunicate-package/authors.html</loc>
+  </url>
+  <url>
     <loc>https://ellessenne.github.io/KMunicate-package/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ellessenne.github.io/KMunicate-package/news/index.html</loc>
   </url>
   <url>
     <loc>https://ellessenne.github.io/KMunicate-package/reference/KMunicate.html</loc>
@@ -16,6 +37,6 @@
     <loc>https://ellessenne.github.io/KMunicate-package/reference/cancer2.html</loc>
   </url>
   <url>
-    <loc>https://ellessenne.github.io/KMunicate-package/articles/KMunicate.html</loc>
+    <loc>https://ellessenne.github.io/KMunicate-package/reference/index.html</loc>
   </url>
 </urlset>

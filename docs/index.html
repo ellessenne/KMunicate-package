@@ -4,14 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Produce Kaplan–Meier plots in the style recommended
+    following the KMunicate study by Morris et al. (2019)
+    &lt;doi:10.1136/bmjopen-2019-030215&gt;. The KMunicate style consists of
+    Kaplan-Meier curves with confidence intervals to quantify uncertainty
+    and an extended risk table (per treatment arm) depicting the number of
+    study subjects at risk, events, and censored observations over time.
+    The resulting plots are built using ggplot2 and can be further
+    customised to a certain extent, including themes, fonts, and colour
+    scales.">
 <title>KMunicate-Style Kaplan–Meier Plots • KMunicate</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="KMunicate-Style Kaplan–Meier Plots">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="KMunicate-Style Kaplan–Meier Plots">
 <meta property="og:description" content="Produce Kaplan–Meier plots in the style recommended
     following the KMunicate study by Morris et al. (2019)
     &lt;doi:10.1136/bmjopen-2019-030215&gt;. The KMunicate style consists of
@@ -26,199 +34,197 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">KMunicate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9000</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">KMunicate</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="articles/KMunicate.html">Get started</a>
 </li>
-<li>
-  <a href="articles/KMunicate.html">Get started</a>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="news/index.html">Changelog</a>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/ellessenne/KMunicate-package/">
-    <span class="fab fa-github fa-lg"></span>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/ellessenne/KMunicate-package/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div id="kmunicate" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#kmunicate" class="anchor"></a>KMunicate</h1></div>
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="kmunicate">KMunicate<a class="anchor" aria-label="anchor" href="#kmunicate"></a>
+</h1></div>
 <!-- badges: start -->
 
-<p>The goal of {KMunicate} is to produce Kaplan–Meier plots in the style recommended following the <a href="http://dx.doi.org/10.1136/bmjopen-2019-030215">KMunicate study</a> (TP Morris <em>et al</em>. Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate. <em>BMJ Open</em>, 2019, 9:e030215).</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install {KMunicate} from <a href="https://CRAN.R-project.org/package=KMunicate">CRAN</a> by typing the following in your R console:</p>
+<p>The goal of {KMunicate} is to produce Kaplan–Meier plots in the style recommended following the <a href="http://dx.doi.org/10.1136/bmjopen-2019-030215" class="external-link">KMunicate study</a> (TP Morris <em>et al</em>. Proposals on Kaplan–Meier plots in medical research and a survey of stakeholder views: KMunicate. <em>BMJ Open</em>, 2019, 9:e030215).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install {KMunicate} from <a href="https://CRAN.R-project.org/package=KMunicate" class="external-link">CRAN</a> by typing the following in your R console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"KMunicate"</span><span class="op">)</span></code></pre></div>
-<p>Alternatively, you can install the dev version of {KMunicate} from <a href="https://github.com/ellessenne/KMunicate-package/">GitHub</a> with:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"KMunicate"</span><span class="op">)</span></code></pre></div>
+<p>Alternatively, you can install the dev version of {KMunicate} from <a href="https://github.com/ellessenne/KMunicate-package/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"ellessenne/KMunicate-package"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ellessenne/KMunicate-package"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ellessenne.github.io/KMunicate-package/">KMunicate</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ellessenne.github.io/KMunicate-package/">KMunicate</a></span><span class="op">)</span></code></pre></div>
 <p>The {KMunicate} package comes with a couple of bundled dataset, <code>cancer</code> and <code>brcancer</code>. The main function is named <code>KMunicate</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">rectime</span>, <span class="va">censrec</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span>, data <span class="op">=</span> <span class="va">brcancer</span><span class="op">)</span>
-<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">brcancer</span><span class="op">$</span><span class="va">rectime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">365</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">rectime</span>, <span class="va">censrec</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span>, data <span class="op">=</span> <span class="va">brcancer</span><span class="op">)</span>
+<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">brcancer</span><span class="op">$</span><span class="va">rectime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">365</span><span class="op">)</span>
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-1.png" width="90%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">studytime</span>, <span class="va">died</span><span class="op">)</span> <span class="op">~</span> <span class="va">drug</span>, data <span class="op">=</span> <span class="va">cancer2</span><span class="op">)</span>
-<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">cancer2</span><span class="op">$</span><span class="va">studytime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">studytime</span>, <span class="va">died</span><span class="op">)</span> <span class="op">~</span> <span class="va">drug</span>, data <span class="op">=</span> <span class="va">cancer2</span><span class="op">)</span>
+<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">cancer2</span><span class="op">$</span><span class="va">studytime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-cancer-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>You also might wonder, does this work with a single arm? Yes, yes it does:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">studytime</span>, <span class="va">died</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">cancer2</span><span class="op">)</span>
-<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">cancer2</span><span class="op">$</span><span class="va">studytime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">studytime</span>, <span class="va">died</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">cancer2</span><span class="op">)</span>
+<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">cancer2</span><span class="op">$</span><span class="va">studytime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-cancer-single-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>Finally, you can also plot 1 - survival by using the argument <code>.reverse = TRUE</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">rectime</span>, <span class="va">censrec</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span>, data <span class="op">=</span> <span class="va">brcancer</span><span class="op">)</span>
-<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">brcancer</span><span class="op">$</span><span class="va">rectime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">365</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">rectime</span>, <span class="va">censrec</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span>, data <span class="op">=</span> <span class="va">brcancer</span><span class="op">)</span>
+<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">brcancer</span><span class="op">$</span><span class="va">rectime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">365</span><span class="op">)</span>
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span>, .reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-reverse-1.png" width="90%" style="display: block; margin: auto;"></p>
 </div>
-<div id="customise-risk-table" class="section level2">
-<h2 class="hasAnchor">
-<a href="#customise-risk-table" class="anchor"></a>Customise Risk Table</h2>
+<div class="section level2">
+<h2 id="customise-risk-table">Customise Risk Table<a class="anchor" aria-label="anchor" href="#customise-risk-table"></a>
+</h2>
 <p>By default, <code><a href="reference/KMunicate.html">KMunicate()</a></code> will build a risk table conform to the KMunicate style, e.g., with cumulative number of events and censored (the column-wise sum is equal to the total number of individuals at risk per arm):</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">rectime</span>, <span class="va">censrec</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span>, data <span class="op">=</span> <span class="va">brcancer</span><span class="op">)</span>
-<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">brcancer</span><span class="op">$</span><span class="va">rectime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">365</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">rectime</span>, <span class="va">censrec</span><span class="op">)</span> <span class="op">~</span> <span class="va">hormon</span>, data <span class="op">=</span> <span class="va">brcancer</span><span class="op">)</span>
+<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">brcancer</span><span class="op">$</span><span class="va">rectime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">365</span><span class="op">)</span>
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-KMunicate-1.png" width="90%" style="display: block; margin: auto;"></p>
 <p>Alternatively, it is possible to customise the risk table via the <code>.risk_table</code> argument. For instance, if one wants to have interval-wise number of events and censored, just pass the <code>survfit</code> value to the <code>.risk_table</code> argument:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span>, .risk_table <span class="op">=</span> <span class="st">"survfit"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-survfit-1.png" width="90%" style="display: block; margin: auto;"></p>
-<p>This is the default output of the <code><a href="https://rdrr.io/pkg/survival/man/summary.survfit.html">summary.survfit()</a></code> function.</p>
+<p>This is the default output of the <code><a href="https://rdrr.io/pkg/survival/man/summary.survfit.html" class="external-link">summary.survfit()</a></code> function.</p>
 <p>Finally, it is also possible to fully omit the risk table by setting <code>.risk_table = NULL</code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span>, .risk_table <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-brcancer-NULL-1.png" width="90%" style="display: block; margin: auto;"></p>
 </div>
-<div id="custom-fonts" class="section level2">
-<h2 class="hasAnchor">
-<a href="#custom-fonts" class="anchor"></a>Custom Fonts</h2>
+<div class="section level2">
+<h2 id="custom-fonts">Custom Fonts<a class="anchor" aria-label="anchor" href="#custom-fonts"></a>
+</h2>
 <p>Assuming you have set up your computer to use custom fonts with <code>ggplot2</code>, customising your KMunicate-style plot is trivial. All you have to do is pass the font name as the <code>.ff</code> argument:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">studytime</span>, <span class="va">died</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">cancer2</span><span class="op">)</span>
-<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">cancer2</span><span class="op">$</span><span class="va">studytime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">KM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">studytime</span>, <span class="va">died</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">cancer2</span><span class="op">)</span>
+<span class="va">time_scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">cancer2</span><span class="op">$</span><span class="va">studytime</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>
 <span class="fu"><a href="reference/KMunicate.html">KMunicate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">KM</span>, time_scale <span class="op">=</span> <span class="va">time_scale</span>, .ff <span class="op">=</span> <span class="st">"Victor Mono"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-cancer-single-ff-1.png" width="90%" style="display: block; margin: auto;"></p>
 </div>
-<div id="further-customisation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#further-customisation" class="anchor"></a>Further Customisation</h2>
+<div class="section level2">
+<h2 id="further-customisation">Further Customisation<a class="anchor" aria-label="anchor" href="#further-customisation"></a>
+</h2>
 <p>Several options to further customise each plot are provided, see e.g. the introductory vignette for more details.</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=KMunicate">https://​cloud.r-project.org/​package=KMunicate</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/ellessenne/KMunicate-package/">https://​github.com/​ellessenne/​KMunicate-package/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/ellessenne/KMunicate-package/issues">
-    https://​github.com/​ellessenne/​KMunicate-package/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=KMunicate" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/ellessenne/KMunicate-package/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ellessenne/KMunicate-package/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing KMunicate</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Alessandro Gasparini <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-8319-7624" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li>Alessandro Gasparini <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-8319-7624" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/ellessenne/KMunicate-package/actions"><img src="https://github.com/ellessenne/KMunicate-package/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/ellessenne/KMunicate-package?branch=master"><img src="https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://CRAN.R-project.org/package=KMunicate"><img src="https://www.r-pkg.org/badges/version/KMunicate" alt="CRAN status"></a></li>
-<li><a href="https://cran.r-project.org/package=KMunicate"><img src="http://cranlogs.r-pkg.org/badges/KMunicate" alt="CRAN_Logs_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=KMunicate"><img src="http://cranlogs.r-pkg.org/badges/grand-total/KMunicate" alt="CRAN_Logs_Badge_Total"></a></li>
+<li><a href="https://github.com/ellessenne/KMunicate-package/actions" class="external-link"><img src="https://github.com/ellessenne/KMunicate-package/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/ellessenne/KMunicate-package?branch=master" class="external-link"><img src="https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=KMunicate" class="external-link"><img src="https://www.r-pkg.org/badges/version/KMunicate" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=KMunicate" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/KMunicate" alt="CRAN_Logs_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=KMunicate" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/KMunicate" alt="CRAN_Logs_Badge_Total"></a></li>
 </ul>
 </div>
-</div>
-</div>
 
-
-      <footer><div class="copyright">
-  <p>Developed by Alessandro Gasparini.</p>
+  </aside>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Alessandro Gasparini.</p>
 </div>
 
-      </footer>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
+</div>
+
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
