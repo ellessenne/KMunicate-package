@@ -1,4 +1,4 @@
-.PHONY: pre_submission_test docs style revdep
+.PHONY: pre_submission_test docs style
 
 pre_submission_test:
 	make docs
