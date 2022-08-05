@@ -1,5 +1,7 @@
 # KMunicate (development version)
 
+* Updated maintainer e-mail.
+
 # KMunicate 0.2.1
 
 This is a minor release.
