@@ -1,4 +1,4 @@
-# KMunicate (development version)
+# KMunicate 0.2.2
 
 * Updated maintainer e-mail.
 
