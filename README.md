@@ -8,7 +8,7 @@
 [![R build
 status](https://github.com/ellessenne/KMunicate-package/workflows/R-CMD-check/badge.svg)](https://github.com/ellessenne/KMunicate-package/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg)](https://codecov.io/gh/ellessenne/KMunicate-package?branch=master)
+coverage](https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ellessenne/KMunicate-package?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/KMunicate)](https://CRAN.R-project.org/package=KMunicate)
 [![CRAN_Logs_Badge](http://cranlogs.r-pkg.org/badges/KMunicate)](https://cran.r-project.org/package=KMunicate)
