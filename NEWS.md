@@ -2,6 +2,8 @@
 
 # KMunicate 0.2.2
 
+This is a minor release, with the following changes:
+
 * Updated maintainer e-mail.
 * Fixed URL that was moved.
 
