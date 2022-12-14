@@ -14,6 +14,7 @@
 #' @param .annotate Optional annotation to be added to the plot, e.g. using [ggplot2::annotate()]. Defaults to `NULL`, where no extra annotation is added.
 #' @param .xlab Label for the horizontal axis, defaults to _Time_.
 #' @param .ylab Label for the vertical axis, defaults to _Estimated survival_ if `.reverse = FALSE`, to _Estimated (1 - survival)_ otherwise.
+#' @param .title A title to be added on top of the plot. Defaults to `NULL`, where no title will be included.
 #' @param .alpha Transparency of the point-wise confidence intervals
 #' @param .rel_heights Override default relative heights of plots and tables. Must be a numeric vector of length equal 1 + 1 per each arm in the Kaplan-Meier plot. See [cowplot::plot_grid()] for more details on how to use this argument.
 #' @param .ff A string used to define a base font for the plot.
@@ -30,8 +31,7 @@
 #' KM <- survfit(Surv(studytime, died) ~ drug, data = cancer2)
 #' time_scale <- seq(0, max(cancer2$studytime), by = 7)
 #' KMunicate(fit = KM, time_scale = time_scale)
-KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FALSE, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .linetype_scale = NULL, .annotate = NULL, .xlab = "Time", .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"), .alpha = 0.25, .rel_heights = NULL, .ff = NULL, .risk_table_base_size = 11, .size = NULL, .legend_position = c(1, 1)) {
-
+KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FALSE, .theme = NULL, .color_scale = NULL, .fill_scale = NULL, .linetype_scale = NULL, .annotate = NULL, .xlab = "Time", .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"), .title = NULL, .alpha = 0.25, .rel_heights = NULL, .ff = NULL, .risk_table_base_size = 11, .size = NULL, .legend_position = c(1, 1)) {
   ### Check arguments
   arg_checks <- checkmate::makeAssertCollection()
   # 'fit' must be of class 'survfit'
@@ -55,9 +55,10 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
   if (!is.null(.fill_scale)) checkmate::assert_true(x = ggplot2::is.ggproto(.fill_scale), add = arg_checks)
   if (!is.null(.linetype_scale)) checkmate::assert_true(x = ggplot2::is.ggproto(.linetype_scale), add = arg_checks)
   if (!is.null(.annotate)) checkmate::assert_true(x = ggplot2::is.ggproto(.annotate), add = arg_checks)
-  # '.xlab', '.ylab' must be a string
+  # '.xlab', '.ylab', '.title' must be a string
   checkmate::assert_string(x = .xlab, add = arg_checks)
   checkmate::assert_string(x = .ylab, add = arg_checks)
+  checkmate::assert_string(x = .title, null.ok = TRUE, add = arg_checks)
   # '.alpha' must be a number
   checkmate::assert_number(x = .alpha, add = arg_checks)
   # '.rel_heights' must be a numeric vector or NULL
@@ -104,14 +105,14 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
   plot <- plot +
     ggplot2::scale_x_continuous(breaks = time_scale) +
     ggplot2::coord_cartesian(ylim = c(0, 1), xlim = range(time_scale)) +
-    ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = .ylab)
+    ggplot2::labs(color = "", fill = "", linetype = "", x = .xlab, y = .ylab, title = .title)
   if (!is.null(.theme)) {
     plot <- plot + .theme
   } else if (!is.null(.ff)) {
     plot <- plot + ggplot2::theme_gray(base_family = .ff)
   }
   plot <- plot +
-    ggplot2::theme(legend.position = .legend_position, legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank(), plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
+    ggplot2::theme(legend.position = .legend_position, legend.background = ggplot2::element_blank(), legend.key = ggplot2::element_blank(), plot.margin = ggplot2::unit(x = c(!is.null(.title), 0.5, 0, 0.5), "lines"))
   if (length(.legend_position) > 1) {
     plot <- plot +
       ggplot2::theme(legend.justification = .legend_position)
@@ -151,7 +152,7 @@ KMunicate <- function(fit, time_scale, .risk_table = "KMunicate", .reverse = FAL
         ggplot2::scale_x_continuous(breaks = time_scale) +
         ggplot2::coord_cartesian(xlim = range(time_scale)) +
         ggplot2::theme_void(base_size = .risk_table_base_size) +
-        ggplot2::theme(plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"))
+        ggplot2::theme(plot.margin = ggplot2::unit(x = rep(0, 4), "lines"))
       if (is.null(.ff)) {
         p <- p + ggplot2::theme(axis.text.y = ggplot2::element_text(face = "italic"))
       } else {

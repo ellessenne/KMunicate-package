@@ -16,6 +16,7 @@ KMunicate(
   .annotate = NULL,
   .xlab = "Time",
   .ylab = ifelse(.reverse, "Estimated (1 - survival)", "Estimated survival"),
+  .title = NULL,
   .alpha = 0.25,
   .rel_heights = NULL,
   .ff = NULL,
@@ -49,6 +50,8 @@ Another possibility is \code{survfit}, which will use the default numbers return
 \item{.xlab}{Label for the horizontal axis, defaults to \emph{Time}.}
 
 \item{.ylab}{Label for the vertical axis, defaults to \emph{Estimated survival} if \code{.reverse = FALSE}, to \emph{Estimated (1 - survival)} otherwise.}
+
+\item{.title}{A title to be added on top of the plot. Defaults to \code{NULL}, where no title will be included.}
 
 \item{.alpha}{Transparency of the point-wise confidence intervals}
 
