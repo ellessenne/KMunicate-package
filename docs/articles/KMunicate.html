@@ -266,6 +266,17 @@ argument:</p>
 <span>  .annotate <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"text"</span>, x <span class="op">=</span> <span class="fl">365</span>, y <span class="op">=</span> <span class="fl">0.5</span>, label <span class="op">=</span> <span class="st">"Some annotation"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="KMunicate_files/figure-html/annotate-1.png" width="75%" style="display: block; margin: auto;"></p>
+<p>You can add customise labels and title with the <code>.xlab</code>,
+<code>.ylab</code>, and <code>.title</code> arguments:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/KMunicate.html">KMunicate</a></span><span class="op">(</span></span>
+<span>  fit <span class="op">=</span> <span class="va">fit2</span>,</span>
+<span>  time_scale <span class="op">=</span> <span class="va">ts</span>,</span>
+<span>  .xlab <span class="op">=</span> <span class="st">"New Label, X Axis"</span>,</span>
+<span>  .ylab <span class="op">=</span> <span class="st">"New Label, Y Axis"</span>,</span>
+<span>  .title <span class="op">=</span> <span class="st">"New Title Who Dis"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="KMunicate_files/figure-html/labels-1.png" width="75%" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

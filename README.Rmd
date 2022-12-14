@@ -13,9 +13,10 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   fig.align = "center",
   out.width = "90%",
-  dpi = 200,
+  dpi = 150,
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  dev = "ragg_png"
 )
 ```
 
@@ -118,7 +119,7 @@ All you have to do is pass the font name as the `.ff` argument:
 ```{r cancer-single-ff, fig.height = 6, fig.width = 6}
 KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
 time_scale <- seq(0, max(cancer2$studytime), by = 7)
-KMunicate(fit = KM, time_scale = time_scale, .ff = "Victor Mono")
+KMunicate(fit = KM, time_scale = time_scale, .ff = "Mona Sans")
 ```
 
 ## Further Customisation
