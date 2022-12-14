@@ -2,7 +2,8 @@
 
 ### New features
 
-* New argument `.title` to add a title to the plot.
+* New argument `.title` to add a title to the plot;
+* Some small updates to documentation.
 
 # KMunicate 0.2.2
 
