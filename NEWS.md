@@ -1,5 +1,9 @@
 # KMunicate (development version)
 
+### New features
+
+* New argument `.title` to add a title to the plot.
+
 # KMunicate 0.2.2
 
 This is a minor release, with the following changes:
