@@ -119,7 +119,7 @@ All you have to do is pass the font name as the `.ff` argument:
 ```{r cancer-single-ff, fig.height = 6, fig.width = 6}
 KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
 time_scale <- seq(0, max(cancer2$studytime), by = 7)
-KMunicate(fit = KM, time_scale = time_scale, .ff = "Mona Sans")
+KMunicate(fit = KM, time_scale = time_scale, .ff = "Times New Roman")
 ```
 
 ## Further Customisation

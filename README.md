@@ -133,7 +133,7 @@ have to do is pass the font name as the `.ff` argument:
 ``` r
 KM <- survfit(Surv(studytime, died) ~ 1, data = cancer2)
 time_scale <- seq(0, max(cancer2$studytime), by = 7)
-KMunicate(fit = KM, time_scale = time_scale, .ff = "Mona Sans")
+KMunicate(fit = KM, time_scale = time_scale, .ff = "Times New Roman")
 ```
 
 <img src="man/figures/README-cancer-single-ff-1.png" width="90%" style="display: block; margin: auto;" />
