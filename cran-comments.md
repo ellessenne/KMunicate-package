@@ -1,24 +1,24 @@
 ## Test environments
 
-* local R installation, R 4.2.1, Intel-based macOS Monterey 12.5
-* ubuntu-latest (via GitHub Actions, devel, release, oldrel)
-* windows-latest (via GitHub Actions, devel, release, oldrel)
-* macos-latest (via GitHub Actions, release, oldrel)
+* local R installation, R 4.2.2, Intel-based macOS Ventura 13.1
+* ubuntu-latest (via GitHub Actions, devel, release, oldrel-1, oldrel-2, oldrel-3)
+* windows-latest (via GitHub Actions, devel, 4.1, 3.6)
+* macos-latest (via GitHub Actions, release)
 * windows (via winbuilder, devel, release, oldrel)
 * rhub (with rhub::check_for_cran())
 * arm64 macOS (with devtools::check_mac_release())
-* arm64 macOS (with rhub::check(platform = 'macos-m1-bigsur-release'))
 
 ## R CMD check results
 
-On all platforms I get the following note:
+On winbuilder, R 4.1.3, I get the following NOTE:
 
-❯ checking CRAN incoming feasibility ... NOTE
-  Maintainer: ‘Alessandro Gasparini <alessandro@ellessenne.xyz>’
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Alessandro Gasparini <alessandro@ellessenne.xyz>'
+
+Possibly mis-spelled words in DESCRIPTION:
+  KMunicate (2:8, 14:19, 15:44)
+  Kaplan (2:24, 13:22, 16:5)
+  al (14:48)
+  et (14:45)
   
-  New maintainer:
-    Alessandro Gasparini <alessandro@ellessenne.xyz>
-  Old maintainer(s):
-    Alessandro Gasparini <alessandro.gasparini@ki.se>
-    
-This is okay, as I just updated my e-mail in the DESCRIPTION file.
+These words are actually okay.
