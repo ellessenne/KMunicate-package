@@ -1,4 +1,8 @@
-# KMunicate (development version)
+# KMunicate 0.2.4
+
+This is a minor release, with the following changes:
+
+* Fixed broken `@docType` package documentation, as per e-mail from CRAN.
 
 # KMunicate 0.2.3
 
