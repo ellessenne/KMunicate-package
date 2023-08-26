@@ -2,7 +2,8 @@
 
 This is a minor release, with the following changes:
 
-* Fixed broken `@docType` package documentation, as per e-mail from CRAN.
+* Fixed broken `@docType` package documentation, as per e-mail from CRAN;
+* Housekeeping.
 
 # KMunicate 0.2.3
 

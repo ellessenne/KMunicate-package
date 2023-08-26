@@ -20,7 +20,7 @@ Description: Produce Kaplan–Meier plots in the style recommended
     customised to a certain extent, including themes, fonts, and colour
     scales.
 License: MIT + file LICENSE
-URL: https://ellessenne.github.io/KMunicate-package/
+URL: https://ellessenne.github.io/KMunicate-package/, https://github.com/ellessenne/KMunicate-package
 BugReports: 
     https://github.com/ellessenne/KMunicate-package/issues
 Depends:
