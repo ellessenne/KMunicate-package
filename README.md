@@ -15,8 +15,6 @@ status](https://www.r-pkg.org/badges/version/KMunicate)](https://CRAN.R-project.
 [![CRAN_Logs_Badge_Total](http://cranlogs.r-pkg.org/badges/grand-total/KMunicate)](https://cran.r-project.org/package=KMunicate)
 <!-- badges: end -->
 
-README Last updated: 2023-01-12.
-
 The goal of {KMunicate} is to produce Kaplan–Meier plots in the style
 recommended following the [KMunicate
 study](http://dx.doi.org/10.1136/bmjopen-2019-030215) (TP Morris *et
