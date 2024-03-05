@@ -1,7 +1,10 @@
 url: https://ellessenne.github.io/KMunicate-package
 template:
   bootstrap: 5
-  params:
-    bootswatch: flatly
+  theme: github-light
+  bslib:
+    base_font: {google: "Atkinson Hyperlegible"}
+    heading_font: {google: "Ubuntu Condensed"}
+
 home:
   title: KMunicate-Style Kaplan–Meier Plots

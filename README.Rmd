@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# KMunicate
+# KMunicate-Style Kaplan–Meier Plots
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/ellessenne/KMunicate-package/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ellessenne/KMunicate-package?branch=master)
