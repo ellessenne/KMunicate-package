@@ -3,10 +3,26 @@
 \docType{package}
 \name{KMunicate-package}
 \alias{KMunicate-package}
-\title{KMunicate-Style Kaplan–Meier Plots}
+\title{KMunicate: KMunicate-Style Kaplan–Meier Plots}
 \description{
-Produce Kaplan–Meier plots in the style recommended following the KMunicate study, \doi{10.1136/bmjopen-2019-030215}.
+Produce Kaplan–Meier plots in the style recommended following the KMunicate study by Morris et al. (2019) \doi{10.1136/bmjopen-2019-030215}. The KMunicate style consists of Kaplan-Meier curves with confidence intervals to quantify uncertainty and an extended risk table (per treatment arm) depicting the number of study subjects at risk, events, and censored observations over time. The resulting plots are built using 'ggplot2' and can be further customised to a certain extent, including themes, fonts, and colour scales.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://ellessenne.github.io/KMunicate-package/}
+  \item \url{https://github.com/ellessenne/KMunicate-package}
+  \item Report bugs at \url{https://github.com/ellessenne/KMunicate-package/issues}
+}
+
 }
 \author{
-Alessandro Gasparini (alessandro@ellessenne.xyz)
+\strong{Maintainer}: Alessandro Gasparini \email{alessandro@ellessenne.xyz} (\href{https://orcid.org/0000-0002-8319-7624}{ORCID}) [copyright holder]
+
+Other contributors:
+\itemize{
+  \item Ary Serpa Neto [contributor]
 }
+
+}
+\keyword{internal}
