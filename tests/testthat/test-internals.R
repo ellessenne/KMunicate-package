@@ -79,3 +79,52 @@ testthat::test_that("Output has correct size with no strata", {
   testthat::expect_equal(object = nrow(KMunicate:::.fortify_summary(fit = KM, time_scale = time_scale, risk_table = "survfit")), expected = length(time_scale))
   testthat::expect_equal(object = ncol(KMunicate:::.fortify_summary(fit = KM, time_scale = time_scale, risk_table = "survfit")), expected = 4)
 })
+
+testthat::test_that(".fortify strips the variable name from strata factor labels", {
+  data("cancer2", package = "KMunicate")
+  cancer2$drug_names <- factor(
+    ifelse(cancer2$drug==1, 1, 2),
+    labels = c("Drug A", "Drug B")
+  )
+  cancer2$biomarker1 <- factor(
+    ifelse(cancer2$drug==1, 1, 2),
+    labels = c("A <= 5", "A > 5")
+  )
+  cancer2$biomarker2 <- factor(
+    ifelse(cancer2$drug==1, 1, 2),
+    labels = c("A < 5", "A > 5")
+  )
+  cancer2$biomarker3 <- factor(
+    ifelse(cancer2$drug==1, 1, 2),
+    labels = c("A ≤ 5", "A > 5")
+  )
+  survdf_drug_names <- KMunicate:::.fortify(survival::survfit0(survfit(
+    Surv(studytime, died) ~ drug_names, data = cancer2
+  )))
+  survdf_biomarker1 <- KMunicate:::.fortify(survival::survfit0(survfit(
+    Surv(studytime, died) ~ biomarker1, data = cancer2
+  )))
+  survdf_biomarker2 <- KMunicate:::.fortify(survival::survfit0(survfit(
+    Surv(studytime, died) ~ biomarker2, data = cancer2
+  )))
+  survdf_biomarker3 <- KMunicate:::.fortify(survival::survfit0(survfit(
+    Surv(studytime, died) ~ biomarker3, data = cancer2
+  )))
+
+  expect_equal(
+    attr(survdf_drug_names$strata, "levels"),
+    attr(cancer2$drug_names, "levels")
+  )
+  expect_equal(
+    attr(survdf_biomarker1$strata, "levels"),
+    attr(cancer2$biomarker1, "levels")
+  )
+  expect_equal(
+    attr(survdf_biomarker2$strata, "levels"),
+    attr(cancer2$biomarker2, "levels")
+  )
+  expect_equal(
+    attr(survdf_biomarker3$strata, "levels"),
+    attr(cancer2$biomarker3, "levels")
+  )
+})

@@ -12,7 +12,7 @@
   )
   if ("strata" %in% names(fit)) {
     out$strata <- rep(names(fit$strata), times = as.numeric(fit$strata))
-    out$strata <- factor(out$strata, levels = names(fit$strata), labels = gsub(".*=", "", names(fit$strata)))
+    out$strata <- factor(out$strata, levels = names(fit$strata), labels = sub(".+?=", "", names(fit$strata)))
   }
   return(out)
 }
@@ -29,7 +29,7 @@
   )
   if ("strata" %in% names(fit)) {
     d$strata <- summ$strata
-    d$strata <- factor(d$strata, levels = levels(d$strata), labels = gsub(".*=", "", levels(d$strata)))
+    d$strata <- factor(d$strata, levels = levels(d$strata), labels = sub(".+?=", "", levels(d$strata)))
   }
   # Use cumulative n.event and n.censor if risk_table == "KMunicate"
   if (risk_table == "KMunicate") {
