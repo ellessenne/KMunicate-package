@@ -1,6 +1,6 @@
 Package: KMunicate
 Title: KMunicate-Style Kaplan–Meier Plots
-Version: 0.2.4.9000
+Version: 0.2.5
 Authors@R: 
     c(person(given = "Alessandro",
              family = "Gasparini",
@@ -9,6 +9,9 @@ Authors@R:
              comment = c(ORCID = "0000-0002-8319-7624")),
       person(given = "Ary",
              family = "Serpa Neto",
+             role = "ctb"),
+      person(given = "Peter",
+             family = "Dutey",
              role = "ctb"))
 Description: Produce Kaplan–Meier plots in the style recommended
     following the KMunicate study by Morris et al. (2019)

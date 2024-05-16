@@ -1,4 +1,9 @@
-# KMunicate (development version)
+# KMunicate 0.2.5
+
+This is a minor release, with the following changes:
+
+* Fixed bug with regular expression handling of strata labels.
+  Thanks to @peterdutey for reporting this and for contributing a patch (#12, #13).
 
 # KMunicate 0.2.4
 
