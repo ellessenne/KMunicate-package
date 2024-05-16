@@ -12,7 +12,8 @@ Authors@R:
              role = "ctb"),
       person(given = "Peter",
              family = "Dutey",
-             role = "ctb"))
+             role = "ctb",
+             comment = c(ORCID = "0000-0002-8942-9836")))
 Description: Produce Kaplan–Meier plots in the style recommended
     following the KMunicate study by Morris et al. (2019)
     <doi:10.1136/bmjopen-2019-030215>. The KMunicate style consists of
