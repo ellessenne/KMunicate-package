@@ -22,7 +22,7 @@ Useful links:
 Other contributors:
 \itemize{
   \item Ary Serpa Neto [contributor]
-  \item Peter Dutey [contributor]
+  \item Peter Dutey (\href{https://orcid.org/0000-0002-8942-9836}{ORCID}) [contributor]
 }
 
 }
